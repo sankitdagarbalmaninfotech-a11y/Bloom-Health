@@ -116,10 +116,10 @@ export function Footer() {
 
   // Memoize the footer columns to prevent unnecessary re-renders
   const footerColumnsContent = React.useMemo(() => (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
       {footerColumns.map((column) => (
-        <div key={column.title}>
-          <h3 className="mb-4 text-sm font-bold uppercase text-primary">
+        <div key={column.title} className="space-y-4">
+          <h3 className="text-sm font-bold uppercase text-primary">
             {column.title}
             {column.title === "FOR PATIENTS" && footerColumns.filter(c => c.title === "FOR PATIENTS").indexOf(column) === 1 && " (CONTINUED)"}
           </h3>
@@ -154,25 +154,31 @@ export function Footer() {
               </ul>
             </div>
           ))}
-          {column.customContent}
+          {column.customContent && (
+            <div className="mt-4">
+              {column.customContent}
+            </div>
+          )}
         </div>
       ))}
     </div>
   ), []);
 
   return (
-    <footer className="bg-card py-12 text-foreground border-t">
+    <footer className="bg-card py-8 md:py-12 text-foreground border-t">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
           <div className="flex-shrink-0">
             <Logo />
           </div>
-          {socialLinksContent}
+          <div className="flex flex-wrap justify-center sm:justify-end gap-3">
+            {socialLinksContent}
+          </div>
         </div>
 
         {footerColumnsContent}
 
-        <div className="mt-12 border-t pt-8 text-center">
+        <div className="mt-8 md:mt-12 border-t pt-6 md:pt-8 text-center">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} Bloom Health. All rights reserved.
           </p>
