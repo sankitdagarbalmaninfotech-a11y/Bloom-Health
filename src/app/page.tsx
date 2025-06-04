@@ -27,7 +27,7 @@ const heroSlides = [
     subheading: "Experience world-class healthcare with cutting-edge technology and compassionate care from our expert medical professionals.",
     ctaText: "OUR SERVICES +",
     ctaLink: "#services",
-    imageUrl: "/slide1.jpg",
+    imageUrl: "/slide1.webp",
     imageHint: "modern hospital facility"
   },
   {

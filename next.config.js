@@ -6,13 +6,22 @@ const nextConfig = {
   },
   output: 'standalone',
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  async redirects() {
+    return [
+      {
+        source: '/404',
+        destination: '/',
+        permanent: true,
+      },
+    ]
   },
 }
 
