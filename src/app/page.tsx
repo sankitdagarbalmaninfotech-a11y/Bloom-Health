@@ -172,12 +172,12 @@ export default function HomePage() {
       {heroSlides.map((slide) => (
         <CarouselItem key={slide.id} className="pl-0 min-h-[70vh] md:min-h-[80vh]">
           <div
-            className="relative h-full w-full bg-cover bg-center"
+            className="relative h-full w-full bg-cover bg-left md:bg-center"
             style={{ backgroundImage: `url(${slide.imageUrl})` }}
             data-ai-hint={slide.imageHint}
           >
             <div className="container mx-auto h-full flex items-center px-4 sm:px-6 lg:px-0">
-              <div className="relative z-10 mx-auto md:mx-0 md:ml-12 lg:ml-0 max-w-md md:max-w-lg lg:max-w-xl text-left p-8 sm:p-10 lg:p-12">
+              <div className="relative z-10 max-w-md md:max-w-lg lg:max-w-xl text-left p-8 sm:p-10 lg:p-12">
                 {slide.pillText && (
                   <div className="mb-3 md:mb-4">
                     <span className="rounded-md bg-primary/20 px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider">
