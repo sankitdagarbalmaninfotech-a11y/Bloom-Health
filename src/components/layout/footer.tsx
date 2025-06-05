@@ -6,88 +6,73 @@ import {
   Linkedin,
   Twitter,
   Youtube,
+  MapPin,
+  PhoneIcon,
+  Mail,
+  Clock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
 
 const footerColumns = [
   {
-    title: 'DISCOVER BLOOM',
+    title: 'OUR SERVICES',
     links: [
-      { name: 'The Bloom Story', href: '#' },
-    ],
-    subsections: [
-      {
-        title: 'LEADERSHIP',
-        links: [
-          { name: 'Ravinder Punia', href: '#' },
-          { name: 'Deepak Khanna', href: '#' },
-          { name: 'Mony Chilam', href: '#' },
-          { name: 'Srikant Chepe', href: '#' },
-        ],
-      },
-      {
-        title: 'CORPORATE GOVERNANCE',
-        links: [
-          { name: 'Corporate Actions', href: '#' },
-          { name: 'Academics & Research', href: '#' },
-          { name: 'Investor Relations', href: '#' },
-          { name: 'Sustainability', href: '#' },
-          { name: 'ARI', href: '#' },
-        ],
-      },
+      { name: 'Cardiac Care', href: '#services' },
+      { name: 'Gynecology', href: '#services' },
+      { name: 'Neurology', href: '#services' },
+      { name: 'Respiratory Care', href: '#services' },
     ],
   },
   {
-    title: 'FOR PATIENTS',
+    title: 'ABOUT US',
     links: [
-      { name: 'Find a Doctor', href: '#' },
-      { name: 'Book Appointment', href: '#' },
-      { name: 'Treatments', href: '#' },
-      { name: 'Emergency 24×7', href: '#' },
-      { name: 'Technology', href: '#' },
-      { name: 'Patient Testimonials', href: '#' },
-      { name: 'CPR', href: '#' },
-      { name: 'Disclaimer', href: '#' },
+      { name: 'Our Mission', href: '#about-us' },
+      { name: 'Our Vision', href: '#about-us' },
+      { name: 'Quality & Safety', href: '#about-us' },
     ],
   },
   {
-    title: 'OUR SERVICES', // As per spec, "FOR PATIENTS (continued)"
+    title: 'CONTACT',
     links: [
-      { name: 'Cardiac Care', href: '#' },
-      { name: 'Cancer Care', href: '#' },
-      { name: 'Neurosciences', href: '#' },
-      { name: 'Gastro Sciences', href: '#' },
-      { name: 'Orthopaedics', href: '#' },
-      { name: 'Renal Care', href: '#' },
-      { name: 'Liver Transplant', href: '#' },
-      { name: 'Bone Marrow Transplant', href: '#' },
-      { name: 'Lung Transplant', href: '#' },
-      { name: 'Chest Surgery', href: '#' },
-      { name: 'More+', href: '#' },
+      { name: 'Get in Touch', href: '#contact' },
+      { name: 'Emergency Care', href: '#contact' },
+      { name: 'Book Appointment', href: '#contact' },
     ],
   },
   {
-    title: 'IMPORTANT INFO',
-    links: [
-      { name: 'Help Desk', href: '#' },
-      { name: 'Blogs', href: '#' },
-      { name: 'Careers', href: '#' },
-      { name: 'Feedback', href: '#' },
-      { name: 'Contact Us', href: '#' },
-      { name: 'News & Events', href: '#' },
-      { name: 'Investor Relations', href: '#' },
-      { name: 'Policies & Forms', href: '#' },
-      { name: 'Sitemap', href: '#' },
-      { name: 'Web Stories', href: '#' },
-    ],
-  },
-  {
-    title: 'DOWNLOAD APP',
+    title: 'LOCATION & HOURS',
     customContent: (
-      <p className="text-sm text-muted-foreground">
-        Download our Bloom Health App to book your appointments at your finger tips
-      </p>
+      <div className="space-y-4">
+        <div className="flex items-start space-x-3">
+          <MapPin className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-medium text-foreground">Address</p>
+            <p className="text-sm text-muted-foreground">
+              123 Health St, Wellness City,<br />
+              London, UK
+            </p>
+          </div>
+        </div>
+        <div className="flex items-start space-x-3">
+          <PhoneIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-medium text-foreground">Phone</p>
+            <a href="tel:+44123456789" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              +44 123 456 789
+            </a>
+          </div>
+        </div>
+        <div className="flex items-start space-x-3">
+          <Mail className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+          <div>
+            <p className="text-sm font-medium text-foreground">Email</p>
+            <a href="mailto:info@bloomhealth.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              info@bloomhealth.com
+            </a>
+          </div>
+        </div>
+      </div>
     ),
   },
 ];
@@ -116,12 +101,11 @@ export function Footer() {
 
   // Memoize the footer columns to prevent unnecessary re-renders
   const footerColumnsContent = React.useMemo(() => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
       {footerColumns.map((column) => (
         <div key={column.title} className="space-y-4">
           <h3 className="text-sm font-bold uppercase text-primary">
             {column.title}
-            {column.title === "FOR PATIENTS" && footerColumns.filter(c => c.title === "FOR PATIENTS").indexOf(column) === 1 && " (CONTINUED)"}
           </h3>
           {column.links && (
             <ul className="space-y-2">
@@ -137,23 +121,6 @@ export function Footer() {
               ))}
             </ul>
           )}
-          {column.subsections && column.subsections.map(sub => (
-            <div key={sub.title} className="mt-4">
-              <h4 className="mb-2 text-xs font-semibold uppercase text-muted-foreground">{sub.title}</h4>
-              <ul className="space-y-2">
-                {sub.links.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-accent transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
           {column.customContent && (
             <div className="mt-4">
               {column.customContent}
@@ -177,6 +144,21 @@ export function Footer() {
         </div>
 
         {footerColumnsContent}
+
+        <div className="mt-12">
+          <div className="h-[400px] w-full rounded-lg overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.47340000002!2d-0.2416814!3d51.5285582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2sus!4v1647881234567!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Bloom Health Location"
+            />
+          </div>
+        </div>
 
         <div className="mt-8 md:mt-12 border-t pt-6 md:pt-8 text-center">
           <p className="text-sm text-muted-foreground">
