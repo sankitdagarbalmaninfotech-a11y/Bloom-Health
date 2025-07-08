@@ -1,5 +1,19 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import { Inter, Lexend } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/components/providers";
+import { cn } from "@/lib/utils";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const lexend = Lexend({
+  subsets: ["latin"],
+  variable: "--font-lexend",
+});
 
 export const metadata: Metadata = {
   title: 'Bloom Health MVP',
@@ -18,12 +32,18 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
-        {children}
-        <Toaster />
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.variable,
+          lexend.variable
+        )}
+      >
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
 }
-
-import { Toaster } from "@/components/ui/toaster";

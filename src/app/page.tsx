@@ -1,6 +1,7 @@
 "use client";
 import type { SVGProps } from 'react';
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import Image from 'next/image';
@@ -8,368 +9,160 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Heart, Globe, Phone as PhoneIcon, Mail, MapPin, ArrowRight, Check } from 'lucide-react';
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+  Stethoscope,
+  Clock,
+  Activity,
+  Shield,
+  Phone as PhoneIcon,
+  Globe,
+  MapPin,
+  ArrowRight,
+  Check,
+  Plus,
+} from 'lucide-react';
+import { services } from '@/lib/services';
 
-const heroSlides = [
-  {
-    id: 1,
-    pillText: "EXCELLENCE IN HEALTHCARE",
-    headingLine1: "Advanced Medical",
-    headingLine2: "Care & Treatment",
-    subheading: "Experience world-class healthcare with cutting-edge technology and compassionate care from our expert medical professionals.",
-    ctaText: "OUR SERVICES +",
-    ctaLink: "#services",
-    imageUrl: "/slide1.webp",
-    imageHint: "modern hospital facility"
-  },
-  {
-    id: 2,
-    pillText: "24/7 EMERGENCY CARE",
-    headingLine1: "Immediate Medical",
-    headingLine2: "Attention When You Need",
-    subheading: "Our emergency department is staffed with experienced specialists, ready to provide immediate care around the clock.",
-    ctaText: "EMERGENCY CONTACT +",
-    ctaLink: "#contact",
-    imageUrl: "/slide2.jpg",
-    imageHint: "emergency medical team"
-  },
-  {
-    id: 3,
-    pillText: "SPECIALIZED CARE",
-    headingLine1: "Expert Medical",
-    headingLine2: "Specialists at Your Service",
-    subheading: "From routine check-ups to complex procedures, our team of specialists provides comprehensive care across all medical disciplines.",
-    ctaText: "MEET OUR TEAM +",
-    ctaLink: "#about-us",
-    imageUrl: "/slide3.jpg",
-    imageHint: "medical consultation"
-  },
+const heroData = {
+  headingLine1: 'WORLD-CLASS CARE,',
+  headingLine2: 'CLOSE TO HOME',
+  subheading: `A new standard in private healthcare for Milton Keynes. Experience world-class medical treatment with a personal touch; expert treatment, kind support, and comfort you can count on, close to home. From urgent walk-in care to specialist clinics, Bloom Health Hospital is here to put your health first, with no long waits and no compromises on quality.`,
+};
+
+const featuresData = [
+  { title: 'Expert Consultants & Advanced Care', desc: 'Our team includes leading consultants across Cardiology, Gastroenterology, Pediatrics, Ear Nose and Throat and more, offering specialist care backed by top-tier technology and proven techniques.', icon: Stethoscope },
+  { title: 'Urgent Care When You Need It', desc: 'Skip the A&E wait. Our Urgent Care Centre offers fast, walk-in treatment for a wide range of unexpected health concerns – no appointment needed.', icon: Clock },
+  { title: 'Comprehensive On-site Diagnostics', desc: 'From an onsite laboratory to state-of-the-art Ultrasound, CT and X-ray imaging, we deliver prompt answers and accurate results all under one roof.', icon: Activity },
+  { title: 'Self-funded & Insured Patients Welcome', desc: "Whether you're self-funding or using private insurance, our dedicated patient advisors make access to excellent care simple. We also offer GP consultations by appointment, virtual or Face to Face, making referrals seamless and accessible.", icon: Shield },
 ];
 
-const infoCardsData = [
-  {
-    title: "Need Immediate Care?",
-    description: "Bloom Health clinic is equipped with best world class machinery & reagents for urgent needs.",
-    buttonText: "Emergency Call",
-    buttonLink: "tel:+1-555-EMERGENCY",
-    bgColor: "bg-rose-50/50",
-    borderColor: "border-rose-200",
-    hoverBgColor: "hover:bg-rose-50",
-    textColor: "text-rose-600",
-  },
-  {
-    title: "Quality & Patient Safety",
-    description: "Our commitment to the highest standards in medical care and patient safety is unwavering.",
-    buttonText: "More About Us",
-    buttonLink: "#about-us",
-    bgColor: "bg-emerald-50/50",
-    borderColor: "border-emerald-200",
-    hoverBgColor: "hover:bg-emerald-50",
-    textColor: "text-emerald-600",
-  },
-  {
-    title: "Unlock Your Wellness Journey",
-    description: "Take the first step towards a healthier you. We're here to guide and support you.",
-    buttonText: "Make Appointment",
-    buttonLink: "#contact",
-    bgColor: "bg-amber-50/50",
-    borderColor: "border-amber-200",
-    hoverBgColor: "hover:bg-amber-50",
-    textColor: "text-amber-600",
-  },
+const whyChooseUsItems = [
+  'Minimal Wait Times — See a doctor when you need one, without long queues.',
+  'Expert Clinicians — Care provided by senior doctors, consultants, and experienced nurses.',
+  'Modern Facilities — State-of-the-art equipment in a welcoming, comfortable environment.',
+  'Accessible Location — Conveniently located with easy parking and transport access.',
+  'Personalised Care — We focus on your needs, offering tailored health solutions.',
+  'Discreet & Confidential — High standards of privacy and patient confidentiality.',
 ];
 
-const servicesData = [
-  {
-    title: "Cardiac Care",
-    description: "Comprehensive heart care services including diagnostics, treatment, and rehabilitation for cardiovascular conditions.",
-    icon: (props: SVGProps<SVGSVGElement>) => (
-      <Image
-        src="/cardiac.svg"
-        alt="Cardiac Care Icon"
-        width={40}
-        height={40}
-        className="text-primary"
-      />
-    ),
-    ctaLink: "#",
-  },
-  {
-    title: "Gynecology",
-    description: "Specialized women's health services including preventive care, diagnostics, and treatment for various conditions.",
-    icon: (props: SVGProps<SVGSVGElement>) => (
-      <Image
-        src="/gyne.svg"
-        alt="Gynecology Icon"
-        width={40}
-        height={40}
-        className="text-primary"
-      />
-    ),
-    ctaLink: "#",
-  },
-  {
-    title: "Neurology",
-    description: "Specialized treatment for neurological disorders, including stroke and epilepsy.",
-    icon: (props: SVGProps<SVGSVGElement>) => (
-      <Image
-        src="/neurology.svg"
-        alt="Neurology Icon"
-        width={40}
-        height={40}
-        className="text-primary"
-      />
-    ),
-    ctaLink: "#",
-  },
-  {
-    title: "Respiratory Care",
-    description: "Expert diagnosis and treatment for respiratory conditions, including asthma, COPD, and sleep disorders.",
-    icon: (props: SVGProps<SVGSVGElement>) => (
-      <Image
-        src="/respiratory.svg"
-        alt="Respiratory Care Icon"
-        width={40}
-        height={40}
-        className="text-primary"
-      />
-    ),
-    ctaLink: "#",
-  }
+const formFields = [
+  { label: 'Name', type: 'text', placeholder: 'Your Name', name: 'name' },
+  { label: 'Email', type: 'email', placeholder: 'your@email.com', name: 'email' },
+  { label: 'Phone Number', type: 'tel', placeholder: '+44 1234 567890', name: 'phone' },
 ];
-
-const missionListItems = [
-  "Patient-Centered Care",
-  "Clinical Excellence",
-  "Community Health Focus",
-  "Innovative Practices",
-];
-
-const visionListItems = [
-  "Global Health Impact",
-  "Medical Advancement",
-  "Trusted Healthcare Partner",
-  "Sustainable Wellbeing",
-];
-
 
 export default function HomePage() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
-  );
-
-  // Memoize the carousel content to prevent unnecessary re-renders
-  const carouselContent = React.useMemo(() => (
-    <CarouselContent className="-ml-0">
-      {heroSlides.map((slide) => (
-        <CarouselItem key={slide.id} className="pl-0 min-h-[70vh] md:min-h-[80vh]">
-          <div
-            className="relative h-full w-full bg-cover bg-left md:bg-center"
-            style={{ backgroundImage: `url(${slide.imageUrl})` }}
-            data-ai-hint={slide.imageHint}
-          >
-            <div className="container mx-auto h-full flex items-center px-4 sm:px-6 lg:px-0">
-              <div className="relative z-10 max-w-md md:max-w-lg lg:max-w-xl text-left p-8 sm:p-10 lg:p-12">
-                {slide.pillText && (
-                  <div className="mb-3 md:mb-4">
-                    <span className="rounded-md bg-primary/20 px-4 py-2 text-xs font-bold text-primary uppercase tracking-wider">
-                      {slide.pillText}
-                    </span>
-                  </div>
-                )}
-                <h1 className="font-headline text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                  {slide.headingLine1}
-                </h1>
-                <h1 className="font-headline text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl mt-0 sm:mt-1 md:mt-2">
-                  {slide.headingLine2}
-                </h1>
-                <p className="mt-4 md:mt-6 text-md leading-relaxed text-muted-foreground sm:text-lg max-w-2xl">
-                  {slide.subheading}
-                </p>
-                <div className="mt-8 md:mt-10">
-                  <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors px-6 py-3 text-base font-semibold">
-                    <Link href={slide.ctaLink}>{slide.ctaText}</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CarouselItem>
-      ))}
-    </CarouselContent>
-  ), []);
-
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Header />
-      <main className="flex-grow">
+    <div className="flex flex-col min-h-screen bg-background">
+      <a href="#main" className="sr-only focus:not-sr-only p-2 bg-primary text-white">Skip to main content</a>
+      <Header className="sticky top-0 z-50 backdrop-blur-sm bg-white/70" />
+      <main id="main" className="flex-grow">
         {/* Hero Section */}
-        <section className="relative w-full">
-          <Carousel
-            opts={{ loop: true }}
-            plugins={[plugin.current]}
-            className="w-full"
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
+        <motion.section
+          className="relative h-[80vh] bg-cover bg-center"
+          style={{ backgroundImage: 'url(/herobg1.webp)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="absolute inset-0 " />
+          <motion.div
+            className="container mx-auto h-full flex items-center px-4"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
-            {carouselContent}
-            <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-10 flex space-x-2 md:space-x-3">
-              <CarouselPrevious className="static translate-y-0 bg-white hover:bg-gray-200 text-primary h-10 w-10 rounded-full shadow-md" />
-              <CarouselNext className="static translate-y-0 bg-white hover:bg-gray-200 text-primary h-10 w-10 rounded-full shadow-md" />
+            <div className="max-w-lg w-full p-6 bg-white/90 backdrop-blur-lg rounded-3xl shadow-2xl border border-gray-200 flex flex-col items-center text-center">
+              <h1 className="text-2xl sm:text-3xl font-headline font-extrabold text-gray-900 leading-tight drop-shadow mb-1">
+                {heroData.headingLine1}
+              </h1>
+              <h2 className="text-lg sm:text-xl font-headline font-bold text-primary mt-1 mb-2">
+                {heroData.headingLine2}
+              </h2>
+              <p className="mt-1 text-base sm:text-lg text-gray-700 leading-relaxed mb-4">
+                {heroData.subheading}
+              </p>
+              <Button
+                asChild
+                size="lg"
+                className="mt-2 bg-gradient-to-r from-primary to-blue-500 hover:from-blue-600 hover:to-primary text-white rounded-full px-8 py-3 shadow-xl transition-all duration-200"
+              >
+                <Link href="#services">EXPLORE SERVICES</Link>
+              </Button>
             </div>
-          </Carousel>
-        </section>
+          </motion.div>
+        </motion.section>
 
-        {/* Info Cards Section */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {infoCardsData.map((card, index) => (
-                <div key={index} className={`${card.bgColor} p-6 rounded-xl shadow-lg flex flex-col`}>
-                  <h3 className="text-3xl font-semibold text-black mb-4">
-                    {card.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-8 flex-grow">
-                    {card.description}
-                  </p>
-                  <Button
-                    asChild={card.buttonLink.startsWith("#") || card.buttonLink.startsWith("/")}
-                    variant="outline"
-                    className={`mt-auto self-start font-medium text-primary ${card.borderColor} ${card.hoverBgColor} hover:text-primary border-2 inline-flex items-center`}
-                  >
-                    {card.buttonLink.startsWith("tel:") ? (
-                      <a href={card.buttonLink} className="inline-flex items-center">
-                        {card.buttonText} <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
-                      </a>
-                    ) : (
-                      <Link href={card.buttonLink} className="inline-flex items-center">
-                        {card.buttonText} <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
-                      </Link>
-                    )}
-                  </Button>
+        {/* Features Section */}
+        <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10">
+              <span className="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full uppercase text-xs tracking-wider font-semibold mb-3">
+                Why Choose Us
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-headline font-extrabold text-foreground mb-2">
+                Your Health, Our Priority
+              </h2>
+              <p className="max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground">
+                Discover the Bloom Health difference—expert care, advanced diagnostics, and a patient-first approach, all under one roof.
+              </p>
+            </div>
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {featuresData.map(({ title, desc, icon: Icon }) => (
+                <div
+                  key={title}
+                  className="flex flex-col items-start p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition"
+                >
+                  <div className="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 mb-4">
+                    <Icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+                  <p className="text-sm text-gray-600">{desc}</p>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Mission and Vision Section (About Us) */}
-        <section id="about-us" className="py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
-            {/* Mission Block */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-              <div>
-                <Image
-                  src="/mission.jpg"
-                  alt="Our Mission"
-                  width={600}
-                  height={450}
-                  className="rounded-lg shadow-xl object-cover w-full h-auto"
-                  data-ai-hint="teamwork healthcare"
-                  loading="lazy"
-                  quality={85}
-                />
-              </div>
-              <div className="text-left">
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider inline-block">
-                  OUR COMMITMENT
-                </span>
-                <h2 className="font-headline text-3xl sm:text-4xl font-bold text-foreground mt-4">
-                  Our Mission
-                </h2>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  To provide excellent, compassionate, and accessible healthcare services to our community, fostering a healthier future for all through dedication and innovation.
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {missionListItems.map((item) => (
-                    <li key={item} className="flex items-center text-foreground">
-                      <Check className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild size="lg" className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md">
-                  <Link href="#services">
-                    LEARN MORE +
+            <div className="mt-12 flex flex-col items-center">
+              <div className="bg-primary/10 rounded-2xl px-6 py-6 max-w-xl w-full flex flex-col sm:flex-row items-center justify-between gap-4 shadow">
+                <span className="text-lg font-semibold text-primary text-center sm:text-left">
+                  Get Started: Call{" "}
+                  <a href="tel:####" className="underline underline-offset-2 decoration-primary font-bold hover:text-primary/80 transition">
+                    ####
+                  </a>{" "}
+                  or{" "}
+                  <Link href="#contact" className="underline underline-offset-2 decoration-primary font-bold hover:text-primary/80 transition">
+                    Enquire Now
                   </Link>
-                </Button>
-              </div>
-            </div>
-
-            {/* Vision Block */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-              
-              <div className="text-left">
-                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider inline-block">
-                  OUR ASPIRATION
+                  {" "}to discover how Bloom Health Hospital can help you start your journey to better health.
                 </span>
-                <h2 className="font-headline text-3xl sm:text-4xl font-bold text-foreground mt-4">
-                  Our Vision
-                </h2>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  To be a leading healthcare institution recognized for clinical excellence, innovative medical care, and a patient-centered approach that improves lives globally.
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {visionListItems.map((item) => (
-                    <li key={item} className="flex items-center text-foreground">
-                      <Check className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild size="lg" className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md">
-                  <Link href="#contact">
-                    DISCOVER MORE +
-                  </Link>
-                </Button>
-              </div>
-              <div>
-                <Image
-                  src="/vision.jpg"
-                  alt="Our Vision"
-                  width={600}
-                  height={450}
-                  className="rounded-lg shadow-xl object-cover w-full h-auto"
-                  data-ai-hint="innovation medical"
-                  loading="lazy"
-                  quality={85}
-                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Services/Clinics Section */}
-        <section id="services" className="py-20 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12 md:mb-16">
-              <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider mb-3">
+        {/* Services Section */}
+        <section id="services" className="py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-10">
+              <span className="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full uppercase text-xs tracking-wider font-semibold mb-3">
                 Our Services
               </span>
-              <h2 className="font-headline text-3xl sm:text-4xl font-bold text-foreground">
-                We Provide Various Directions
+              <h2 className="text-3xl sm:text-4xl font-headline font-extrabold text-foreground mb-2">
+                Comprehensive Medical Services
               </h2>
+              <p className="max-w-2xl mx-auto text-base sm:text-lg text-muted-foreground">
+                Explore our wide range of specialist and urgent care services, designed to meet your health needs with expertise and compassion.
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {servicesData.map((service) => (
-                <div key={service.title} className="border rounded-lg p-6 shadow-sm flex flex-col text-left hover:shadow-lg transition-shadow duration-300 h-[280px]">
-                  <div className="mb-5 text-primary h-12 flex items-center">
-                    <service.icon className="h-10 w-10" />
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((svc) => (
+                <div key={svc.slug} className="p-6 bg-white rounded-2xl shadow-lg border border-gray-100 flex flex-col items-start hover:shadow-xl transition">
+                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10 mb-3">
+                    <Plus className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3 h-8">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-6 flex-grow">
-                    {service.description}
-                  </p>
-                  <Link href={service.ctaLink} className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
-                    READ MORE +
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">{svc.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4 flex-grow">{svc.description}</p>
+                  <Link href={`/services/${svc.slug}`} className="inline-flex items-center text-primary font-medium underline underline-offset-2 decoration-primary hover:text-primary/80 transition">
+                    LEARN MORE <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               ))}
@@ -377,78 +170,120 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Contact Us Section */}
-        <section id="contact" className="py-20 bg-card">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="font-headline text-3xl font-bold text-center text-primary mb-16">Contact Us</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                    {/* Contact Form */}
-                    <form className="space-y-6 p-8 border rounded-lg shadow-lg">
-                        <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">Name</label>
-                            <Input type="text" id="name" name="name" placeholder="Your Name" className="w-full rounded-md"/>
-                        </div>
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">Email</label>
-                            <Input type="email" id="email" name="email" placeholder="your@email.com" className="w-full rounded-md"/>
-                        </div>
-                        <div>
-                            <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-1">Phone Number</label>
-                            <Input type="tel" id="phone" name="phone" placeholder="+1-555-123-4567" className="w-full rounded-md"/>
-                        </div>
-                        <div>
-                            <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">Message</label>
-                            <Textarea id="message" name="message" rows={4} placeholder="How can we help you?" className="w-full rounded-md"/>
-                        </div>
-                        <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-md transition-colors">
-                           Submit Message
-                        </Button>
-                    </form>
-
-                    {/* Contact Information */}
-                    <div className="space-y-6 p-8 bg-muted/30 rounded-lg shadow-lg">
-                        <div>
-                            <h3 className="text-xl font-semibold text-primary mb-4">Get in Touch</h3>
-                            <p className="text-muted-foreground mb-6">
-                                We're here to help and answer any question you might have. We look forward to hearing from you.
-                            </p>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                            <PhoneIcon className="h-6 w-6 text-primary"/>
-                            <a href="tel:+15551234567" className="text-foreground hover:text-primary transition-colors">+1-555-123-4567</a>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                            <Mail className="h-6 w-6 text-primary"/>
-                            <a href="mailto:info@bloomhealth.com" className="text-foreground hover:text-primary transition-colors">info@bloomhealth.com</a>
-                        </div>
-                        <div className="flex items-start space-x-3">
-                            <MapPin className="h-6 w-6 text-primary mt-1"/>
-                            <p className="text-foreground">
-                                123 Health St, Wellness City, ST 54321<br/>United States
-                            </p>
-                        </div>
-                         <div className="mt-6">
-                            <Image
-                                src="/contact.jpg"
-                                alt="Map placeholder"
-                                width={600}
-                                height={400}
-                                className="rounded-lg shadow-md object-cover w-full"
-                                data-ai-hint="map location"
-                                loading="lazy"
-                                quality={85}
-                            />
-                        </div>
-                    </div>
-                </div>
+        {/* Why Choose Us Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4 grid gap-12 md:grid-cols-2 items-center">
+            <div>
+              <span className="bg-primary/10 text-primary px-3 py-1 rounded-full uppercase text-xs font-semibold">
+                Why Choose Bloom Health?
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-headline font-bold text-foreground">
+                Your Health in Trusted Hands
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                At Bloom Health, we believe every patient deserves prompt, high-quality medical care delivered with compassion and expertise. Our team combines urgent care and specialist outpatient services, ensuring your health is in safe, capable hands.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {whyChooseUsItems.map((item) => (
+                  <li key={item} className="flex items-start">
+                    <Check className="h-5 w-5 text-primary mr-3 mt-1" />
+                    <span className="text-gray-800">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+            <div>
+              <Image
+                src="/vision.jpg"
+                alt="Comfortable and modern facility"
+                width={600}
+                height={450}
+                className="rounded-xl shadow-xl object-cover w-full h-auto"
+                loading="lazy"
+                quality={85}
+              />
+            </div>
+          </div>
         </section>
 
+        {/* Contact Section */}
+        <section id="contact" className="py-20 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-headline font-bold text-foreground">
+                Book an Appointment
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
+                We offer flexible appointments, including same-day and walk-in urgent care availability. Reach out to us to get started.
+              </p>
+            </div>
+            <div className="grid gap-12 md:grid-cols-2">
+              <form className="space-y-6 p-8 bg-white rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold text-foreground mb-6">Request an Appointment Online</h3>
+                {formFields.map(({ label, type, placeholder, name }) => (
+                  <div key={name}>
+                    <label htmlFor={name} className="block text-sm font-medium text-foreground mb-1">{label}</label>
+                    {type === 'text' || type === 'email' || type === 'tel' ? (
+                      <Input type={type} id={name} name={name} placeholder={placeholder} className="w-full rounded-md" />
+                    ) : (
+                      <Textarea id={name} name={name} rows={4} placeholder={placeholder} className="w-full rounded-md" />
+                    )}
+                  </div>
+                ))}
+                <div>
+                  <label htmlFor="appointmentType" className="block text-sm font-medium text-foreground mb-1">Type of Appointment</label>
+                  <select id="appointmentType" name="appointmentType" className="w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="">Select type</option>
+                    <option value="general">General Consultation</option>
+                    <option value="specialist">Specialist Consultation</option>
+                    <option value="urgent">Urgent Care</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1">
+                    <label htmlFor="preferredDate" className="block text-sm font-medium text-foreground mb-1">Preferred Date</label>
+                    <Input type="date" id="preferredDate" name="preferredDate" className="w-full rounded-md" />
+                  </div>
+                  <div className="flex-1">
+                    <label htmlFor="preferredTime" className="block text-sm font-medium text-foreground mb-1">Preferred Time</label>
+                    <Input type="time" id="preferredTime" name="preferredTime" className="w-full rounded-md" />
+                  </div>
+                </div>
+                <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-white rounded-full shadow-md py-3">
+                  Submit Request
+                </Button>
+              </form>
+
+              <aside className="space-y-6 p-8 bg-white rounded-xl shadow-lg">
+                <div className="flex items-center space-x-4">
+                  <PhoneIcon className="h-8 w-8 text-primary" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Call Us</h4>
+                    <a href="tel:####" className="text-foreground hover:text-primary">####</a>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Globe className="h-8 w-8 text-primary" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Book Online</h4>
+                    <a href="#" className="text-foreground hover:text-primary">[booking link]</a>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <MapPin className="h-8 w-8 text-primary mt-1" />
+                  <div>
+                    <h4 className="font-semibold text-foreground">Visit Us</h4>
+                    <p className="text-foreground">[insert address]</p>
+                  </div>
+                </div>
+                <Image src="/contact.jpg" alt="Bloom Health location" width={600} height={400} className="rounded-xl shadow-md w-full mt-4 object-cover" />
+              </aside>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
   );
 }
-
-
-    
