@@ -1,5 +1,14 @@
-# Firebase Studio
+# Bloom Health (React + Vite)
 
-This is a NextJS starter in Firebase Studio.
+Migrated from Next.js to React + Vite.
 
-To get started, take a look at src/app/page.tsx.
+Scripts
+
+- dev: `vite --port 9002`
+- build: `tsc -b && vite build`
+- preview: `vite preview --port 9002`
+
+Entry points
+
+- App shell: `src/main.tsx` and `src/App.tsx`
+- Routes: `src/app/page.tsx` and `src/app/services/*` mounted via React Router
