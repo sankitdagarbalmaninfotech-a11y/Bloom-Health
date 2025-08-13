@@ -187,7 +187,7 @@ body {
 
 .info-icon {
   color: #006680;
-  font-size: 30px !important;
+  font-size: 50px !important;
   margin-right: 10px;
 }
 
@@ -283,6 +283,33 @@ textarea {
   align-items: center;
 }
 
+/* Add to your global CSS */
+.scrollable-menu::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollable-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.scrollable-menu::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.scrollable-menu::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.short-text {
+  display: none;
+}
+
+/* Show short text and hide full text below 540px */
+@media (max-width: 540px) {
+  .short-text {
+    display: inline;
+  }
+  .full-text {
+    display: none;
+  }
+}
 /* Responsive */
 @media (max-width: 768px) {
   .appointment-container {

@@ -1,7 +1,32 @@
 import React from "react";
 import { LocationOn, Phone, AccessTime, Email } from "@mui/icons-material";
+import { AnimatedBlock } from "../components/layout/UseInView";
 
 const BookAnAppointment = () => {
+
+  const infoItems = [
+    {
+      icon: <LocationOn className="info-icon" />,
+      title: "Address",
+      desc: "123 Health St, Wellness City,\nLondon, UK",
+    },
+    {
+      icon: <Phone className="info-icon" />,
+      title: "Call or Whatsapp",
+      desc: "+44 123 456 789",
+    },
+    {
+      icon: <AccessTime className="info-icon" />,
+      title: "Opening Hours",
+      desc: "Saturday to Thursday\n8:00 AM to 8:00 PM\nEmergency open 24/7",
+    },
+    {
+      icon: <Email className="info-icon" />,
+      title: "Mail",
+      desc: "info@bloomhealth.com",
+    },
+  ];
+
   return (
     <div>
       <div className='bg-blue-500 border-b border-gray-300 py-3 px-4 sm:px-6'>
@@ -11,66 +36,42 @@ const BookAnAppointment = () => {
       </div>
       <div className='appointment-container'>
         {/* Left Column */}
-        <div className='contact-info mt-48'>
-          <div
-            className='intro-text opacity-0 translate-y-5 animate-slide-up text-xl'
-            style={{ animationDelay: '0.2s' }}
-          >
-            Thank you for choosing Bloom Health. We look forward to serving you.
-          </div>
-          <div className='flex flex-row'>
-            <div
-              className='info-block opacity-0 translate-y-5 animate-slide-up w-[250px] flex flex-col gap-3'
-              style={{ animationDelay: '0.2s' }}
-            >
-              <LocationOn className='info-icon' />
-              <div>
-                <h4>Address</h4>
-                <div className="mt-4">
-                    123 Health St, Wellness City,
-                  <br />
-                  London, UK
+        <div className='contact-info mt-48 flex flex-col gap-12'>
+          {/* Intro text */}
+          <AnimatedBlock delay={0.1}>
+            <span className="font-semibold text-lg">
+              Thank you for choosing Bloom Health. We look forward to serving you.
+            </span>
+          </AnimatedBlock>
+
+          {/* First row */}
+          <div className='flex flex-row flex-wrap gap-6'>
+            {infoItems.slice(0, 2).map((item, idx) => (
+              <AnimatedBlock key={idx} delay={0.2 + idx * 0.2}>
+                <div className='info-block w-[250px] flex flex-col gap-3'>
+                  {item.icon}
+                  <div>
+                    <h4>{item.title}</h4>
+                    <div className='mt-4 whitespace-pre-line'>{item.desc}</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className='info-block opacity-0 translate-y-5 animate-slide-up w-[250px] flex flex-col gap-3'
-              style={{ animationDelay: '0.2s' }}
-            >
-              <Phone className='info-icon' />
-              <div>
-                <h4>Call or Whatsapp</h4>
-                <div className="mt-4">+44 123 456 789</div>
-              </div>
-            </div>
+              </AnimatedBlock>
+            ))}
           </div>
-          <div className='flex flex-row mt-12'>
-            <div
-              className='info-block opacity-0 translate-y-5 animate-slide-up w-[250px] flex flex-col gap-3'
-              style={{ animationDelay: '0.2s' }}
-            >
-              <AccessTime className='info-icon' />
-              <div>
-                <h4>Opening Hours</h4>
-                <div className="mt-4">
-                  Saturday to Thursday
-                  <br />
-                  8:00 AM to 8:00 PM
-                  <br />
-                  Emergency open 24/7
+
+          {/* Second row */}
+          <div className='flex flex-row flex-wrap gap-6'>
+            {infoItems.slice(2).map((item, idx) => (
+              <AnimatedBlock key={idx} delay={0.6 + idx * 0.2}>
+                <div className='info-block w-[250px] flex flex-col gap-3'>
+                  {item.icon}
+                  <div>
+                    <h4>{item.title}</h4>
+                    <div className='mt-4 whitespace-pre-line'>{item.desc}</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className='info-block opacity-0 translate-y-5 animate-slide-up w-[250px] flex flex-col gap-3'
-              style={{ animationDelay: '0.2s' }}
-            >
-              <Email className='info-icon' />
-              <div>
-                <h4>Mail</h4>
-                <div className="mt-4">info@bloomhealth.com</div>
-              </div>
-            </div>
+              </AnimatedBlock>
+            ))}
           </div>
         </div>
 
@@ -130,4 +131,4 @@ const BookAnAppointment = () => {
   );
 }
 
-export default BookAnAppointment
+export default BookAnAppointment;

@@ -63,7 +63,7 @@ export default function HomePage() {
     <>
         <motion.section
           id='home'
-          className='hide-card relative h-[80vh] bg-cover bg-center '
+          className='hide-card relative h-[80vh] bg-cover bg-center scroll-mt-[100px]'
           style={{ backgroundImage: 'url(/herobg1.webp)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

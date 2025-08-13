@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select, Card, CardContent } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Card } from "@mui/material";
 
 export default function HospitalsDoctors() {
   const [specialty, setSpecialty] = useState('');
@@ -61,26 +61,29 @@ export default function HospitalsDoctors() {
             </Select>
         </FormControl>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2 sm:px-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:px-0">
         {filteredDoctors?.map((doc) => (
-            <div
+          <div
             key={doc.id}
             className="flex flex-col items-center text-center"
-            >
+          >
             <Card className="overflow-hidden shadow-lg w-full max-w-xs group">
-                <div className="relative w-full aspect-[4/5]">
+              <div className="relative w-full aspect-[4/5]">
                 <img
-                    src={doc.image}
-                    alt={doc.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  src={doc.image}
+                  alt={doc.name}
+                  className="w-full h-full object-cover"
                 />
-                </div>
+                
+                {/* Blue gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
             </Card>
-            <div className="mt-3">
-                <h3 className="font-bold text-lg">{doc.name}</h3>
-                <p className="text-gray-500 text-sm">{doc.specialty}</p>
+            <div className="mb-8">
+              <h3 className="font-bold text-lg">{doc.name}</h3>
+              <p className="text-gray-500 text-sm">{doc.specialty}</p>
             </div>
-            </div>
+          </div>
         ))}
         </div>
       </div>

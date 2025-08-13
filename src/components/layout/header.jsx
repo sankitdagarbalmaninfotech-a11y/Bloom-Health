@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
 import { useEffect, useRef, useState } from 'react';
-import { featureOptions, medicalServicesMenu, navItems, socialLinks } from './MenuUtils';
+import { featureOptions, medicalServicesMenu, navItems, socialLinks, specialtyColumns } from './MenuUtils';
 import { HashLink } from 'react-router-hash-link';
 
 export function Header() {
@@ -65,10 +65,11 @@ export function Header() {
               ))}
             </nav>
             <div>
-              <Link to='/bookAppointment' className='book-btn'>
-                Book an Appointment
-              </Link>
-            </div>
+  <Link to='/bookAppointment' className='book-btn'>
+    <span className="full-text">Book an Appointment</span>
+    <span className="short-text">Book</span>
+  </Link>
+</div>
             <div className='hidden lg:flex items-center space-x-3'>
               {socialLinks.map((social) => (
                 <a
@@ -93,69 +94,104 @@ export function Header() {
           </div>
           <div className='p-2'>
             <nav
-              className='hidden lg:flex flex-1 flex-wrap items-center justify-center gap-x-1 gap-y-2 pb-2 relative'
+              className='hidden lg:flex flex-1 flex-wrap items-center justify-center gap-y-2 pb-2 relative'
               ref={menuRef}
             >
-              {featureOptions?.map((item) => (
-                <div key={item.name} className='relative'>
-                  <Button
-                    variant='ghost'
-                    className='text-foreground hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary'
-                    onClick={() => setOpenMenu(openMenu === item.name ? null : item.name)}
-                  >
-                    {item.name}
-                    <ChevronDown className='w-4 h-4 ml-1' />
-                  </Button>
+              {featureOptions?.filter((item) => item?.enabled)
+                .map((item) => (
+                  <div key={item?.name} className='relative'>
+                    <Button
+                      variant='ghost'
+                      className='text-foreground hover:bg-accent hover:text-primary focus:bg-accent focus:text-primary'
+                      onClick={() => setOpenMenu(openMenu === item.name ? null : item.name)}
+                    >
+                      {item.name}
+                      <ChevronDown className='w-4 h-4 ml-1' />
+                    </Button>
 
-                  {/* Regular dropdown for items with submenu */}
-                  {openMenu === item.name && item.submenu?.length > 0 && (
-                    <div className='absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50'>
-                      {item.submenu.map((sub) =>
-                        sub.href.startsWith('/') ? (
-                          <Link
-                            key={sub.name}
-                            to={sub.href}
-                            className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                            onClick={() => setOpenMenu(null)}
-                          >
-                            {sub.name}
-                          </Link>
-                        ) : (
-                          <a
-                            key={sub.name}
-                            href={sub.href}
-                            className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                          >
-                            {sub.name}
-                          </a>
-                        ),
-                      )}
-                    </div>
-                  )}
+                    {/* Regular dropdown for items with submenu */}
+                    {openMenu === item.name && item.submenu?.length > 0 && (
+                      <div className='absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50'>
+                        {item.submenu.map((sub) =>
+                          sub.href.startsWith('/') ? (
+                            <Link
+                              key={sub.name}
+                              to={sub.href}
+                              className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                              onClick={() => setOpenMenu(null)}
+                            >
+                              {sub.name}
+                            </Link>
+                          ) : (
+                            <a
+                              key={sub.name}
+                              href={sub.href}
+                              className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
+                            >
+                              {sub.name}
+                            </a>
+                          ),
+                        )}
+                      </div>
+                    )}
 
-                  {/* Mega Menu for Medical Services */}
-                  {openMenu === item.name && item.name === 'Medical Services' && (
-                    <div className='absolute left-[-200px] bg-white shadow-lg border border-gray-200 rounded-lg mt-2 w-[900px] h-[500px] p-6 z-50'>
-                      <div className='grid grid-cols-4 gap-8'>
-                        {medicalServicesMenu.map((section) => (
-                          <div key={section.title}>
-                            <h3 className='font-semibold text-primary mb-2'>{section.title}</h3>
-                            <ul className='space-y-1'>
-                              {section.items.map((service) => (
-                                <li key={service}>
-                                  <a href='#' className='text-sm text-gray-700 hover:text-primary'>
-                                    {service}
+                    {/* Mega Menu for Medical Services */}
+                    {openMenu === item.name && item.name === 'Medical Services' && (
+                      <div className='absolute left-[-200px] bg-white shadow-lg border border-gray-200 rounded-lg mt-2 w-[900px] h-[500px] p-6 z-50'>
+                        <div className='grid grid-cols-4 gap-8'>
+                          {medicalServicesMenu.map((section) => (
+                            <div key={section.title}>
+                              <h3 className='font-semibold text-primary mb-2'>{section.title}</h3>
+                              <ul className='space-y-1'>
+                              {section.items.map((service) => {
+                                const path = service
+                                  .split(' ') 
+                                  .map((word, i) =>
+                                    i === 0
+                                      ? word.toLowerCase() 
+                                      : word.charAt(0).toUpperCase() + word.slice(1)
+                                  )
+                                  .join('');
+
+                                return (
+                                  <li key={service}>
+                                    <Link
+                                      to={`/${path}`}
+                                      className='text-xs text-gray-700 hover:text-primary'
+                                      onClick={() => setOpenMenu(null)}  
+                                    >
+                                      {service}
+                                    </Link>
+                                  </li>
+                                );
+                              })}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Specialty Units/Clinics dropdown */}
+                    {openMenu === item?.name && item?.name === 'Specialty Units/Clinics' && (
+                      <div className="absolute left-[-200px] mt-2 w-[800px] bg-white border border-gray-200 rounded-md shadow-lg z-50 p-6">
+                        <div className="grid grid-cols-3 gap-6">
+                          {Object.values(specialtyColumns).map((column, colIndex) => (
+                            <ul key={colIndex} className="space-y-1">
+                              {column.map((clinic, index) => (
+                                <li key={index}>
+                                  <a href="#" className="text-sm text-gray-700 hover:text-primary">
+                                    {clinic}
                                   </a>
                                 </li>
                               ))}
                             </ul>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                    )}
+                  </div>
+                ))}
             </nav>
           </div>
           <div className='flex-1' />
@@ -182,13 +218,14 @@ export function Header() {
                   <span className='sr-only'>Toggle mobile menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side='left' className='w-full max-w-sm bg-white text-foreground p-0'>
-                <div className='flex h-full flex-col'>
-                  {/* Logo */}
-                  <div className='p-4 border-b border-neutral-200'>
-                    <Logo />
-                  </div>
+              <SheetContent side='left' className='w-full max-w-sm bg-white text-foreground p-0 flex flex-col'>
+                {/* Logo */}
+                <div className='p-4 border-b border-neutral-200'>
+                  <Logo />
+                </div>
 
+                {/* Scrollable Content */}
+                <div className='flex-1 overflow-y-auto'>
                   {/* Feature Options */}
                   <nav className='flex flex-col divide-y divide-gray-200'>
                     {featureOptions.map((item) => (
@@ -229,23 +266,35 @@ export function Header() {
                             <summary className='cursor-pointer text-base font-medium text-foreground'>
                               {item.name}
                             </summary>
-                            <div className='mt-3 grid grid-cols-2 gap-4 pl-2'>
+                            <div className='mt-3 grid grid-cols-2 gap-4 pl-2 overflow-y-auto max-h-[60vh]'>
                               {medicalServicesMenu.map((section) => (
                                 <div key={section.title}>
                                   <h3 className='font-semibold text-primary mb-1 text-sm'>
                                     {section.title}
                                   </h3>
                                   <ul className='space-y-1'>
-                                    {section.items.map((service) => (
-                                      <li key={service}>
-                                        <a
-                                          href='#'
-                                          className='text-xs text-gray-700 hover:text-primary'
-                                        >
-                                          {service}
-                                        </a>
-                                      </li>
-                                    ))}
+                                    {section.items.map((service) => {
+                                      const path = service
+                                        .split(' ')                          
+                                        .map((word, i) =>
+                                          i === 0
+                                            ? word.toLowerCase()
+                                            : word.charAt(0).toUpperCase() + word.slice(1)
+                                        )
+                                        .join('');
+
+                                      return (
+                                        <li key={service}>
+                                          <Link
+                                            to={`/${path}`}
+                                            className='text-xs text-gray-700 hover:text-primary'
+                                            onClick={() => setOpenMenu(null)}  
+                                          >
+                                            {service}
+                                          </Link>
+                                        </li>
+                                      );
+                                    })}
                                   </ul>
                                 </div>
                               ))}
@@ -265,16 +314,6 @@ export function Header() {
                       </div>
                     ))}
                   </nav>
-
-                  {/* Bottom Section */}
-                  <div className='mt-auto border-t border-neutral-200 p-4 space-y-4'>
-                    <Button
-                      asChild
-                      className='w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-md'
-                    >
-                      <a href='/#contact'>TALK TO US +</a>
-                    </Button>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
