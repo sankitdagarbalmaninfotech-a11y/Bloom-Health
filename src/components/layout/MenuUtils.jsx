@@ -47,49 +47,58 @@ export const medicalServicesMenu = [
       'Cardiology',
       'Neurology',
       'Rheumatology',
-      'Endocrinology',
+      // 'Endocrinology',
       'Gastroenterology',
-      'Infectious Diseases',
+      'Respiratory Medicine',
+      // 'Infectious Diseases',
     ],
+  },
+  {
+    title: 'Preventive Care & Wellness',
+    items: [
+      'Urgent Care',
+      'Travel Medicine & Vaccinations',
+      'General Medicine'
+    ]
   },
   {
     title: 'Obstetrics & Gynecology',
     items: [
-      'Maternity & Fetal Care',
+      // 'Maternity & Fetal Care',
       'Gynecology',
-      'Obstetrics',
-      'IVF / Reproductive Medicine and Surgery',
+      // 'Obstetrics',
+      // 'IVF / Reproductive Medicine and Surgery',
     ],
   },
   {
-    title: 'Pediatrics',
-    items: ['General Pediatrics', 'Neonatology', 'Pulmonary & Allergy'],
+    title: 'Paediatrics',
+    items: ['General Pediatrics'],
   },
-  {
-    title: 'Surgery',
-    items: [
-      'General Surgery',
-      'Anesthesia',
-      'Orthopedics',
-      'Neurosurgery',
-      'Otolaryngology (ENT)/Head and Neck Surgery',
-      'Urology',
-      'Plastic & Reconstructive',
-      'Ophthalmology',
-    ],
-  },
-  {
-    title: 'Dental',
-    items: ['Adult Dentistry', 'Pediatric Dentistry', 'Cosmetic Dentistry'],
-  },
+  // {
+  //   title: 'Surgery',
+  //   items: [
+  //     'General Surgery',
+  //     'Anesthesia',
+  //     'Orthopedics',
+  //     'Neurosurgery',
+  //     'Otolaryngology (ENT)/Head and Neck Surgery',
+  //     'Urology',
+  //     'Plastic & Reconstructive',
+  //     'Ophthalmology',
+  //   ],
+  // },
+  // {
+  //   title: 'Dental',
+  //   items: ['Adult Dentistry', 'Pediatric Dentistry', 'Cosmetic Dentistry'],
+  // },
   {
     title: 'Dermatology',
-    items: ['Medical & Cosmetic'],
+    items: ['Dermatology'],
   },
-  {
-    title: 'Pharmacy',
-    items: ['Pharmacy Services'],
-  },
+  // {
+  //   title: 'Pharmacy',
+  //   items: ['Pharmacy Services'],
+  // },
 ];
 
 export const specialtyColumns = {

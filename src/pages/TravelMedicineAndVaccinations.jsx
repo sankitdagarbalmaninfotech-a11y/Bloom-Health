@@ -1,32 +1,33 @@
 import React, { useEffect } from 'react';
 import Department from '../components/layout/Department';
 
-const Gastroenterology = () => {
+const TravelMedicineAndVaccinations = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <Department
-      departmentName='Gastroenterology at Bloom Health'
-      overviewText='Expert care for digestive health issues.'
-      overviewDescription='At Bloom Health, our Gastroenterology service provides expert assessment, diagnosis, and treatment for conditions affecting the stomach, intestines, liver, pancreas, and digestive system. We offer advanced endoscopic procedures alongside personalised, compassionate care, helping you find answers and regain comfort.
+      departmentName='Travel Medicine & Vaccinations at Bloom Health'
+      overviewText='Your partner in safe, healthy travel'
+      overviewDescription='At Bloom Health, our Travel Medicine Clinic offers expert pre-travel consultations, vaccinations, and prescriptions to help you travel safely and confidently. Our experienced team tailors advice to your destination and health needs, providing up-to-date guidance on country-specific health risks.
 
-      Whether you are experiencing persistent heartburn, abdominal pain, bloating, altered bowel habits, or liver concerns, our experienced specialists are here to support you every step of the way.'
+      Whether you need malaria prevention, altitude medications, or routine and travel-specific vaccines, we are here to support your health before, during, and after your journey.'
       services={[
-        'Gastroenterology Consultation',
+        'Rheumatology Consultation',
         'EEG Testing',
         'EMG/Nerve Conduction Studies',
         'Botulinum Toxin Therapy',
       ]}
       diseases={[
-        'Comprehensive consultations with expert gastroenterologists',
-        'Advanced diagnostic testing, including blood tests, imaging, and specialist scans',
-        'Endoscopic procedures, such as gastroscopy and colonoscopy, performed with skill and care',
-        'Personalised treatment plans tailored to your specific needs and health goals',
-        'Clear, compassionate guidance to help you understand your condition and manage your digestive health with confidence',
+        'Pre-travel consultations and personalised health advice',
+        'Comprehensive vaccination services',
+        'Travel-related prescriptions and health precautions',
+        'Post-travel assessments if health issues arise'
       ]}
       moreDetails={
-        <span>For more detailed information about our gastroenterology services and tests, please visit our <strong>Gastroenterology Information Page</strong>.</span>
+        <span>
+          For more detailed information about our travel medicine services, please visit our <strong>Travel Medicine Information Page</strong>.
+        </span>
       }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
@@ -67,4 +68,4 @@ const Gastroenterology = () => {
   );
 };
 
-export default Gastroenterology;
+export default TravelMedicineAndVaccinations;

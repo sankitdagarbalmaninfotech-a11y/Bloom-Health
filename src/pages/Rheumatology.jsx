@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import Department from "../components/layout/Department";
 
 const Rheumatology = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Department
-      departmentName="Rheumatology"
-      overviewText="Our Rheumatology department provides comprehensive care for disorders of the nervous system. Our team of neurologists and neurosurgeons are experts in diagnosing and treating conditions affecting the brain, spinal cord, and peripheral nerves. We utilize advanced diagnostic tools and treatment modalities to provide personalized care for each patient."
+      departmentName="Rheumatology at Bloom Health"
+      overviewText="Expert care for joint, bone, and autoimmune conditions"
+      overviewDescription="Our rheumatology specialists provide expert compassionate care for individuals living with joint, muscle, bone, and autoimmune conditions — including arthritis, connective tissue diseases, and inflammatory disorders. We understand that these conditions can affect both your physical comfort and daily life, and we are committed to offering sensitive, personalised care in a private and supportive setting."
       services={[
         'Rheumatology Consultation',
         'EEG Testing',
@@ -12,13 +17,14 @@ const Rheumatology = () => {
         'Botulinum Toxin Therapy'
       ]}
       diseases={[
-        'Epilepsy',
-        'Migraine and Headache Disorders',
-        'Multiple Sclerosis',
-        'Parkinson\'s Disease',
-        'Stroke',
-        'Rheumatopathy'
+        'Specialist rheumatology consultations delivered with care and discretion',
+        'Diagnostic testing, including autoimmune blood panels, inflammatory markers, and imaging',
+        'Personalised treatment plans, including medication management, physical therapy recommendations, lifestyle adjustments, and referrals when appropriate',
+        'Access to in-house investigations and coordinated care with orthopaedics, physiotherapy, or pain services if needed'
       ]}
+      moreDetails={
+        <span>For more detailed information about our rheumatology services, please visit our <strong>Rheumatology Information Page</strong>.</span>
+      }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
         'Stroke Unit',

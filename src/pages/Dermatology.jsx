@@ -1,32 +1,29 @@
 import React, { useEffect } from 'react';
 import Department from '../components/layout/Department';
 
-const Gastroenterology = () => {
+const Dermatology = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <Department
-      departmentName='Gastroenterology at Bloom Health'
-      overviewText='Expert care for digestive health issues.'
-      overviewDescription='At Bloom Health, our Gastroenterology service provides expert assessment, diagnosis, and treatment for conditions affecting the stomach, intestines, liver, pancreas, and digestive system. We offer advanced endoscopic procedures alongside personalised, compassionate care, helping you find answers and regain comfort.
-
-      Whether you are experiencing persistent heartburn, abdominal pain, bloating, altered bowel habits, or liver concerns, our experienced specialists are here to support you every step of the way.'
+      departmentName='Dermatology at Bloom Health'
+      overviewText='Specialist skin care for all ages'
+      overviewDescription='Our dermatology team offers expert, confidential care for a wide range of skin, hair, and nail concerns — including acne, eczema, psoriasis, skin infections, moles, and skin cancer assessments. We understand that skin conditions can affect not just your health but also your confidence and wellbeing, which is why we provide sensitive, personalised consultations and treatments in a private, supportive setting.'
       services={[
-        'Gastroenterology Consultation',
+        'Rheumatology Consultation',
         'EEG Testing',
         'EMG/Nerve Conduction Studies',
         'Botulinum Toxin Therapy',
       ]}
       diseases={[
-        'Comprehensive consultations with expert gastroenterologists',
-        'Advanced diagnostic testing, including blood tests, imaging, and specialist scans',
-        'Endoscopic procedures, such as gastroscopy and colonoscopy, performed with skill and care',
-        'Personalised treatment plans tailored to your specific needs and health goals',
-        'Clear, compassionate guidance to help you understand your condition and manage your digestive health with confidence',
+        'Specialist dermatology consultations in a discreet, patient-centred environment',
+        'Diagnostic assessments, including dermoscopy, and skin biopsies',
+        'Personalised treatment plans, including topical or systemic therapies, procedural treatments, and skincare advice tailored to your needs',
+        'Access to in-house investigations, minor skin procedures, prescriptions, and fast-track referrals to surgical or oncology services if required',
       ]}
       moreDetails={
-        <span>For more detailed information about our gastroenterology services and tests, please visit our <strong>Gastroenterology Information Page</strong>.</span>
+        <span>For more detailed information about our dermatology services, please visit our <strong>Dermatology Information Page</strong>.</span>
       }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
@@ -67,4 +64,4 @@ const Gastroenterology = () => {
   );
 };
 
-export default Gastroenterology;
+export default Dermatology;

@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Department from '../components/layout/Department';
 
 const Gynecology = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Department
-      departmentName='Gynecology'
-      overviewText='Our Gynecology department provides comprehensive care for disorders of the nervous system. Our team of neurologists and neurosurgeons are experts in diagnosing and treating conditions affecting the brain, spinal cord, and peripheral nerves. We utilize advanced diagnostic tools and treatment modalities to provide personalized care for each patient.'
+      departmentName='Women’s Health & Gynaecology at Bloom Health'
+      overviewText='Personalised, expert care for women’s health needs'
+      overviewDescription="Our women’s health specialists offer discreet, expert consultations and personalised care for a wide range of gynaecological concerns, including menstrual disorders, fibroids, ovarian cysts, menopause management, pelvic pain, and reproductive health. We provide sensitive, confidential, and individualised treatment, ensuring that each woman feels respected, understood, and supported at every stage of life."
       services={[
-        'Gynecology Consultation',
-        'EEG Testing',
-        'EMG/Nerve Conduction Studies',
-        'Botulinum Toxin Therapy',
+        'Specialist gynaecology consultations',
+        'Diagnostic services including pelvic ultrasound, hormonal testing, and cervical screening',
+        'Personalised treatment plans including medical therapies, minor procedures, or surgical referrals',
+        'Access to in-house investigations, outpatient treatments, prescriptions, and coordination with fertility, urology, or surgical services as needed',
       ]}
+      moreDetails={
+        <span>For more detailed information about our women’s health and gynaecology services, please visit our <strong>Women’s Health Information Page</strong>.</span>
+      }
       diseases={[
-        'Epilepsy',
-        'Migraine and Headache Disorders',
-        'Multiple Sclerosis',
-        "Parkinson's Disease",
-        'Stroke',
-        'Gynecology',
+        'Specialist gynaecology consultations',
+        'Diagnostic services including pelvic ultrasound, hormonal testing, and cervical screening',
+        'Personalised treatment plans including medical therapies, minor procedures, or surgical referrals',
+        "Access to in-house investigations, outpatient treatments, prescriptions, and coordination with fertility, urology, or surgical services as needed"
       ]}
       specialtyUnits={[
         'Epilepsy Monitoring Unit',

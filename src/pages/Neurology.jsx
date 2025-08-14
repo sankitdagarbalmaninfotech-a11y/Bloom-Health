@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import Department from "../components/layout/Department";
 
 const Neurology = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Department
-      departmentName="Neurology"
-      overviewText="Our Neurology department provides comprehensive care for disorders of the nervous system. Our team of neurologists and neurosurgeons are experts in diagnosing and treating conditions affecting the brain, spinal cord, and peripheral nerves. We utilize advanced diagnostic tools and treatment modalities to provide personalized care for each patient."
+      departmentName="Neurology at Bloom Health"
+      overviewText=""
+      overviewDescription="Our neurology team provides compassionate, expert care for people experiencing a wide range of neurological concerns, including epilepsy, headaches, migraines, movement disorders, nerve pain, and memory difficulties. We understand that neurological symptoms can feel overwhelming or uncertain, and we are here to guide you with clear explanations, thoughtful support, and highly personalised treatment plans."
       services={[
         'Neurological Consultation',
         'EEG Testing',
@@ -12,13 +17,14 @@ const Neurology = () => {
         'Botulinum Toxin Therapy'
       ]}
       diseases={[
-        'Epilepsy',
-        'Migraine and Headache Disorders',
-        'Multiple Sclerosis',
-        'Parkinson\'s Disease',
-        'Stroke',
-        'Neuropathy'
+        'Specialist neurology consultations tailored to your needs',
+        'Diagnostic testing, including EEG (in-clinic or at home if required), MRI, CT scans, and nerve conduction studies',
+        'Personalised treatment plans, including medication management, symptom control strategies, and referrals to the pain clinic when appropriate',
+        'Access to in-house investigations, outpatient monitoring, and coordination with neurosurgery, neuropsychology, or allied health services as needed'
       ]}
+      moreDetails={
+        <span>For more detailed information about our neurology and epilepsy services, please visit our <strong>Neurology & Epilepsy Information Page</strong>.</span>
+      }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
         'Stroke Unit',

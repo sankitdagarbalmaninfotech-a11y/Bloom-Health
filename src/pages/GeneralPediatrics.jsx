@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Department from '../components/layout/Department';
 
 const GeneralPediatrics = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Department
-      departmentName='GeneralPediatrics'
-      overviewText='Our GeneralPediatrics department provides comprehensive care for disorders of the nervous system. Our team of neurologists and neurosurgeons are experts in diagnosing and treating conditions affecting the brain, spinal cord, and peripheral nerves. We utilize advanced diagnostic tools and treatment modalities to provide personalized care for each patient.'
+      departmentName='Paediatrics Services at Bloom Health'
+      overviewText='Specialist medical care for infants, children, and teens in a friendly, family-centred environment'
+      overviewDescription="At Bloom Health, our dedicated Paediatrics Service ensures young patients receive expert treatment delivered with gentle, reassuring care. We understand that children’s health concerns can be stressful for families, and our experienced paediatric team is here to provide attentive, personalised support through every stage of childhood and adolescence.
+
+      Whether your child needs urgent care for a sudden illness, ongoing management for a chronic condition, or routine health checks, we offer comprehensive, family-focused services designed to keep your child healthy and thriving. Our team works closely with parents and caregivers, ensuring you feel informed, supported, and confident in every aspect of your child’s care."
       services={[
         'GeneralPediatrics Consultation',
         'EEG Testing',
@@ -13,13 +19,15 @@ const GeneralPediatrics = () => {
         'Botulinum Toxin Therapy',
       ]}
       diseases={[
-        'Epilepsy',
-        'Migraine and Headache Disorders',
-        'Multiple Sclerosis',
-        "Parkinson's Disease",
-        'Stroke',
-        'GeneralPediatrics',
+        'Paediatric consultations for infants, children, and adolescents',
+        'Same-day and scheduled appointments for urgent and routine concerns',
+        'Access to in-house investigations, prescriptions, and specialist referrals',
       ]}
+      moreDetails={
+        <span>
+          If you would like further information about our Paediatrics Services or need assistance deciding whether your child requires an appointment, please contact us, our team is happy to assist you.
+        </span>
+      }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
         'Stroke Unit',

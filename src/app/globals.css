@@ -301,6 +301,10 @@ textarea {
   display: none;
 }
 
+.MuiInputBase-inputMultiline {
+  overflow: hidden !important; /* Hide scrollbar */
+  resize: none !important;     /* Disable manual resize */
+}
 /* Show short text and hide full text below 540px */
 @media (max-width: 540px) {
   .short-text {

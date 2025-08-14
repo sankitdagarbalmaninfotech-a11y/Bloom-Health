@@ -35,6 +35,12 @@ const Ophthalmology = lazy(() => import('@/pages/Ophthalmology'));
 const AdultDentistry = lazy(() => import('@/pages/AdultDentistry'));
 const PediatricDentistry = lazy(() => import('@/pages/PediatricDentistry'));
 const CosmeticDentistry = lazy(() => import('@/pages/CosmeticDentistry'));
+const MedicalAndCosmetic = lazy(() => import('@/pages/MedicalAndCosmetic'));
+const Dermatology = lazy(() => import('@/pages/Dermatology'));
+const RespiratoryMedicine = lazy(() => import('@/pages/RespiratoryMedicine'));
+const UrgentCare = lazy(() => import('@/pages/UrgentCare'));
+const TravelMedicineAndVaccinations = lazy(() => import('@/pages/TravelMedicineAndVaccinations'));
+const GeneralMedicine = lazy(() => import('@/pages/GeneralMedicine'));
 
 export default function App() {
   return (
@@ -70,6 +76,12 @@ export default function App() {
               <Route path="/adultDentistry" element={<AdultDentistry/>}/>
               <Route path="/pediatricDentistry" element={<PediatricDentistry/>}/>
               <Route path="/cosmeticDentistry" element={<CosmeticDentistry/>}/>
+              <Route path="/respiratoryMedicine" element={<RespiratoryMedicine/>}/>
+              <Route path="/medical&Cosmetic" element={<MedicalAndCosmetic/>}/>
+              <Route path="/dermatology" element={<Dermatology/>}/>
+              <Route path="/urgentCare" element={<UrgentCare/>}/>
+              <Route path="/generalMedicine" element={<GeneralMedicine/>}/>
+              <Route path="/travelMedicine&Vaccinations" element={<TravelMedicineAndVaccinations/>}/>
               <Route path="/otolaryngology(ENT)/HeadAndNeckSurgery" element={<OtolaryngologyHeadAndNeckSurgery/>}/>
               <Route path="/ivf/ReproductiveMedicineAndSurgery" element={<IvfReproductiveMedicineAndSurgery/>}/>
               <Route path="/services/:slug/:subServiceSlug" element={<SubServicePage />} />

@@ -1,32 +1,32 @@
 import React, { useEffect } from 'react';
 import Department from '../components/layout/Department';
 
-const Gastroenterology = () => {
+const RespiratoryMedicine = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <Department
-      departmentName='Gastroenterology at Bloom Health'
-      overviewText='Expert care for digestive health issues.'
-      overviewDescription='At Bloom Health, our Gastroenterology service provides expert assessment, diagnosis, and treatment for conditions affecting the stomach, intestines, liver, pancreas, and digestive system. We offer advanced endoscopic procedures alongside personalised, compassionate care, helping you find answers and regain comfort.
-
-      Whether you are experiencing persistent heartburn, abdominal pain, bloating, altered bowel habits, or liver concerns, our experienced specialists are here to support you every step of the way.'
+      departmentName='Respiratory Medicine at Bloom Health'
+      overviewText='Expert care for lung and breathing health'
+      overviewDescription='Our respiratory specialists provide comprehensive assessment, diagnosis, and management for conditions such as asthma, chronic cough, COPD, interstitial lung disease, and sleep-related breathing disorders. We deliver personalised care plans focused on improving breathing, reducing symptoms, and enhancing quality of life.'
       services={[
-        'Gastroenterology Consultation',
+        'Rheumatology Consultation',
         'EEG Testing',
         'EMG/Nerve Conduction Studies',
         'Botulinum Toxin Therapy',
       ]}
       diseases={[
-        'Comprehensive consultations with expert gastroenterologists',
-        'Advanced diagnostic testing, including blood tests, imaging, and specialist scans',
-        'Endoscopic procedures, such as gastroscopy and colonoscopy, performed with skill and care',
-        'Personalised treatment plans tailored to your specific needs and health goals',
-        'Clear, compassionate guidance to help you understand your condition and manage your digestive health with confidence',
+        'Specialist respiratory consultations',
+        'Lung function testing, chest imaging, and sleep assessmentsDiagnostic testing, including autoimmune blood panels, inflammatory markers, and imaging',
+        'Personalised treatment plans including inhaler therapies, medication management, and lifestyle strategies',
+        'Access to in-house investigations, sleep studies, and referrals to pulmonary rehabilitation or thoracic surgery when requiredAccess to in-house investigations and coordinated care with orthopaedics, physiotherapy, or pain services if needed',
       ]}
       moreDetails={
-        <span>For more detailed information about our gastroenterology services and tests, please visit our <strong>Gastroenterology Information Page</strong>.</span>
+        <span>
+          For more detailed information about our respiratory medicine services, please visit our{' '}
+          <strong>Respiratory Medicine Information Page</strong>.
+        </span>
       }
       specialtyUnits={[
         'Epilepsy Monitoring Unit',
@@ -67,4 +67,4 @@ const Gastroenterology = () => {
   );
 };
 
-export default Gastroenterology;
+export default RespiratoryMedicine;

@@ -17,7 +17,7 @@ import { HashLink } from 'react-router-hash-link';
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState(null);
-
+  const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -65,11 +65,11 @@ export function Header() {
               ))}
             </nav>
             <div>
-  <Link to='/bookAppointment' className='book-btn'>
-    <span className="full-text">Book an Appointment</span>
-    <span className="short-text">Book</span>
-  </Link>
-</div>
+              <Link to='/bookAppointment' className='book-btn'>
+                <span className='full-text'>Book an Appointment</span>
+                <span className='short-text'>Book</span>
+              </Link>
+            </div>
             <div className='hidden lg:flex items-center space-x-3'>
               {socialLinks.map((social) => (
                 <a
@@ -97,7 +97,8 @@ export function Header() {
               className='hidden lg:flex flex-1 flex-wrap items-center justify-center gap-y-2 pb-2 relative'
               ref={menuRef}
             >
-              {featureOptions?.filter((item) => item?.enabled)
+              {featureOptions
+                ?.filter((item) => item?.enabled)
                 .map((item) => (
                   <div key={item?.name} className='relative'>
                     <Button
@@ -111,7 +112,7 @@ export function Header() {
 
                     {/* Regular dropdown for items with submenu */}
                     {openMenu === item.name && item.submenu?.length > 0 && (
-                      <div className='absolute left-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50'>
+                      <div className='absolute left-0 mt-3 w-56 bg-gradient-to-br from-white to-gray-100 border-gray-200 rounded-md shadow-lg z-50'>
                         {item.submenu.map((sub) =>
                           sub.href.startsWith('/') ? (
                             <Link
@@ -132,55 +133,58 @@ export function Header() {
                             </a>
                           ),
                         )}
+                        <div className="absolute left-[50px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
                       </div>
+                      
                     )}
 
                     {/* Mega Menu for Medical Services */}
                     {openMenu === item.name && item.name === 'Medical Services' && (
-                      <div className='absolute left-[-200px] bg-white shadow-lg border border-gray-200 rounded-lg mt-2 w-[900px] h-[500px] p-6 z-50'>
-                        <div className='grid grid-cols-4 gap-8'>
+                     <div className="absolute left-[-260px] mt-3 bg-gradient-to-br from-white to-gray-100 shadow-lg border border-gray-200 rounded-lg w-[90vw] max-w-[1200px] h-auto min-h-[300px] p-6 z-50">
+                        <div className='grid grid-cols-5 gap-8'>
                           {medicalServicesMenu.map((section) => (
                             <div key={section.title}>
                               <h3 className='font-semibold text-primary mb-2'>{section.title}</h3>
                               <ul className='space-y-1'>
-                              {section.items.map((service) => {
-                                const path = service
-                                  .split(' ') 
-                                  .map((word, i) =>
-                                    i === 0
-                                      ? word.toLowerCase() 
-                                      : word.charAt(0).toUpperCase() + word.slice(1)
-                                  )
-                                  .join('');
+                                {section.items.map((service) => {
+                                  const path = service
+                                    .split(' ')
+                                    .map((word, i) =>
+                                      i === 0
+                                        ? word.toLowerCase()
+                                        : word.charAt(0).toUpperCase() + word.slice(1),
+                                    )
+                                    .join('');
 
-                                return (
-                                  <li key={service}>
-                                    <Link
-                                      to={`/${path}`}
-                                      className='text-xs text-gray-700 hover:text-primary'
-                                      onClick={() => setOpenMenu(null)}  
-                                    >
-                                      {service}
-                                    </Link>
-                                  </li>
-                                );
-                              })}
+                                  return (
+                                    <li key={service}>
+                                      <Link
+                                        to={`/${path}`}
+                                        className='text-xs text-gray-700 hover:text-primary'
+                                        onClick={() => setOpenMenu(null)}
+                                      >
+                                        {service}
+                                      </Link>
+                                    </li>
+                                  );
+                                })}
                               </ul>
                             </div>
                           ))}
                         </div>
+                        <div className="absolute left-[310px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
                       </div>
                     )}
 
                     {/* Specialty Units/Clinics dropdown */}
                     {openMenu === item?.name && item?.name === 'Specialty Units/Clinics' && (
-                      <div className="absolute left-[-200px] mt-2 w-[800px] bg-white border border-gray-200 rounded-md shadow-lg z-50 p-6">
-                        <div className="grid grid-cols-3 gap-6">
+                      <div className='absolute left-[-200px] mt-3 w-[800px] bg-gradient-to-br from-white to-gray-100 border-gray-200 rounded-md shadow-lg z-50 p-6'>
+                        <div className='grid grid-cols-3 gap-6'>
                           {Object.values(specialtyColumns).map((column, colIndex) => (
-                            <ul key={colIndex} className="space-y-1">
+                            <ul key={colIndex} className='space-y-1'>
                               {column.map((clinic, index) => (
                                 <li key={index}>
-                                  <a href="#" className="text-sm text-gray-700 hover:text-primary">
+                                  <a href='#' className='text-sm text-gray-700 hover:text-primary'>
                                     {clinic}
                                   </a>
                                 </li>
@@ -188,6 +192,7 @@ export function Header() {
                             </ul>
                           ))}
                         </div>
+                        <div className="absolute left-[255px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
                       </div>
                     )}
                   </div>
@@ -207,7 +212,7 @@ export function Header() {
           </div>
           {/* Mobile Feature Options Menu */}
           <div className='lg:hidden mr-3'>
-            <Sheet>
+            <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant='outline'
@@ -218,7 +223,10 @@ export function Header() {
                   <span className='sr-only'>Toggle mobile menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side='left' className='w-full max-w-sm bg-white text-foreground p-0 flex flex-col'>
+              <SheetContent
+                side='left'
+                className='w-full max-w-sm bg-white text-foreground p-0 flex flex-col'
+              >
                 {/* Logo */}
                 <div className='p-4 border-b border-neutral-200'>
                   <Logo />
@@ -240,9 +248,9 @@ export function Header() {
                               {item.submenu.map((sub) =>
                                 sub.href.startsWith('/') ? (
                                   <Link
-                                    key={sub.name}
                                     to={sub.href}
                                     className='block text-sm text-gray-700 hover:text-primary'
+                                    onClick={() => setOpen(false)}
                                   >
                                     {sub.name}
                                   </Link>
@@ -251,6 +259,7 @@ export function Header() {
                                     key={sub.name}
                                     href={sub.href}
                                     className='block text-sm text-gray-700 hover:text-primary'
+                                    onClick={() => setOpen(false)}
                                   >
                                     {sub.name}
                                   </a>
@@ -275,11 +284,11 @@ export function Header() {
                                   <ul className='space-y-1'>
                                     {section.items.map((service) => {
                                       const path = service
-                                        .split(' ')                          
+                                        .split(' ')
                                         .map((word, i) =>
                                           i === 0
                                             ? word.toLowerCase()
-                                            : word.charAt(0).toUpperCase() + word.slice(1)
+                                            : word.charAt(0).toUpperCase() + word.slice(1),
                                         )
                                         .join('');
 
@@ -288,7 +297,7 @@ export function Header() {
                                           <Link
                                             to={`/${path}`}
                                             className='text-xs text-gray-700 hover:text-primary'
-                                            onClick={() => setOpenMenu(null)}  
+                                            onClick={() => setOpenMenu(null)}
                                           >
                                             {service}
                                           </Link>
