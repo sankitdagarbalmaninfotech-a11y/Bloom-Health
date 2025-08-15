@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LocationOn, Phone, AccessTime, Email } from "@mui/icons-material";
 import { AnimatedBlock } from "../components/layout/UseInView";
 
 const BookAnAppointment = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const infoItems = [
     {

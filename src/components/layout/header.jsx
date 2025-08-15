@@ -17,7 +17,8 @@ import { HashLink } from 'react-router-hash-link';
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [openLeftSheet, setOpenLeftSheet] = useState(false); // For the left sheet (feature options)
+  const [openRightSheet, setOpenRightSheet] = useState(false); // For the right sheet (main menu)
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -212,7 +213,7 @@ export function Header() {
           </div>
           {/* Mobile Feature Options Menu */}
           <div className='lg:hidden mr-3'>
-            <Sheet open={open} onOpenChange={setOpen}>
+            <Sheet open={openLeftSheet} onOpenChange={setOpenLeftSheet}>
               <SheetTrigger asChild>
                 <Button
                   variant='outline'
@@ -238,6 +239,31 @@ export function Header() {
                   <nav className='flex flex-col divide-y divide-gray-200'>
                     {featureOptions.map((item) => (
                       <div key={item.name} className='p-4'>
+                        {/* Specialty Units/Clinics Mobile Version */}
+                        {item.name === 'Specialty Units/Clinics' && (
+                          <details>
+                            <summary className='cursor-pointer text-base font-medium text-foreground'>
+                              {item.name}
+                            </summary>
+                            <div className='mt-3 grid grid-cols-1 gap-4 pl-2'>
+                              {Object.values(specialtyColumns).map((column, colIndex) => (
+                                <ul key={colIndex} className='space-y-1'>
+                                  {column.map((clinic, index) => (
+                                    <li key={index}>
+                                      <Link
+                                        to={`/${clinic.toLowerCase().replace(/\s+/g, '-')}`}
+                                        className='text-sm text-gray-700 hover:text-primary'
+                                        onClick={() => setOpenLeftSheet(false)}
+                                      >
+                                        {clinic}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ))}
+                            </div>
+                          </details>
+                        )}
                         {/* Item with submenu */}
                         {item.submenu?.length > 0 && item.name !== 'Medical Services' && (
                           <details>
@@ -250,7 +276,7 @@ export function Header() {
                                   <Link
                                     to={sub.href}
                                     className='block text-sm text-gray-700 hover:text-primary'
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setOpenLeftSheet(false)}
                                   >
                                     {sub.name}
                                   </Link>
@@ -259,7 +285,7 @@ export function Header() {
                                     key={sub.name}
                                     href={sub.href}
                                     className='block text-sm text-gray-700 hover:text-primary'
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => setOpenLeftSheet(false)}
                                   >
                                     {sub.name}
                                   </a>
@@ -297,7 +323,7 @@ export function Header() {
                                           <Link
                                             to={`/${path}`}
                                             className='text-xs text-gray-700 hover:text-primary'
-                                            onClick={() => setOpenMenu(null)}
+                                            onClick={() => setOpenLeftSheet(false)}
                                           >
                                             {service}
                                           </Link>
@@ -329,7 +355,7 @@ export function Header() {
           </div>
           {/* Mobile Menu */}
           <div className='lg:hidden'>
-            <Sheet>
+            <Sheet open={openRightSheet} onOpenChange={setOpenRightSheet}>
               <SheetTrigger asChild>
                 <Button
                   variant='outline'
@@ -346,15 +372,17 @@ export function Header() {
                     <Logo />
                   </div>
                   <nav className='flex flex-col space-y-1 p-4'>
-                    {navItems.map((item) => (
-                      <Link
-                        href={item.href}
-                        className='block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-primary transition-colors'
-                        key={item.name}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                  {navItems.map((item) => (
+                    <HashLink  // Changed from Link to HashLink
+                      smooth
+                      to={item.href}  // Changed from href to to
+                      className='block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-primary transition-colors'
+                      key={item.name}
+                      onClick={() => setOpenRightSheet(false)} // Close the sheet when clicked
+                    >
+                      {item.name}
+                    </HashLink>
+                  ))}
                   </nav>
                   <div className='mt-auto space-y-4 p-4 border-t border-neutral-200'>
                     <div className='flex items-center space-x-2'>
