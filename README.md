@@ -1,20 +1,14 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Bloom Health (React + Vite)
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Migrated from Next.js to React + Vite.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Scripts
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- dev: `vite --port 9002`
+- build: `tsc -b && vite build`
+- preview: `vite preview --port 9002`
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Entry points
+
+- App shell: `src/main.tsx` and `src/App.tsx`
+- Routes: `src/app/page.tsx` and `src/app/services/*` mounted via React Router
