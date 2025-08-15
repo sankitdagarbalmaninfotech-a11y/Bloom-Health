@@ -2,10 +2,15 @@ import { getService } from '@/lib/services';
 import { Button } from '@/components/ui/button';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function ServicePage() {
   const { slug = '' } = useParams();
   const service = getService(slug);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!service) {
     return (
