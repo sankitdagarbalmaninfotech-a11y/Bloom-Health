@@ -7,6 +7,10 @@ export default function ServicePage() {
   const { slug = '' } = useParams();
   const service = getService(slug);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (!service) {
     return (
       <div className='flex min-h-screen items-center justify-center'>
