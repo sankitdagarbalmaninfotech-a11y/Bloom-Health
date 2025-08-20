@@ -42,7 +42,7 @@ const WomenWellBeing = () => {
                 Obstetrics
               </button>
               <button className='w-full text-left px-4 py-2 bg-white border border-gray-300 rounded-md shadow hover:bg-gray-100'>
-                General Gynecology
+                General Gynaecology
               </button>
               <button className='w-full text-left px-4 py-2 bg-white border border-gray-300 rounded-md shadow hover:bg-gray-100'>
                 Reproductive health and IVF
@@ -55,7 +55,7 @@ const WomenWellBeing = () => {
             <h3 className='text-2xl font-semibold text-blue-500 mb-4'>Specialty Units</h3>
             <ul className='list-disc list-inside text-gray-700 space-y-1'>
               <li>Vulvar Unit</li>
-              <li>Urogynecology Unit</li>
+              <li>Urogynaecology Unit</li>
               <li>Menopause Unit</li>
               <li>Fertility Unit</li>
             </ul>

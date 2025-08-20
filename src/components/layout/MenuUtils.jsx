@@ -33,13 +33,6 @@ export const socialLinks = [
   { name: 'LinkedIn', icon: Linkedin, href: '#' },
 ];
 
-export const navItems = [
-  { name: 'Home', href: '/#home' },
-  { name: 'Our Story', href: '/#about-us' },
-  { name: 'Services', href: '/#services' },
-  { name: 'Contact Us', href: '/#contact' },
-];
-
 export const medicalServicesMenu = [
   {
     title: 'Internal Medicine',
@@ -62,10 +55,10 @@ export const medicalServicesMenu = [
     ]
   },
   {
-    title: 'Obstetrics & Gynecology',
+    title: 'Obstetrics & Gynaecology',
     items: [
       // 'Maternity & Fetal Care',
-      'Gynecology',
+      'Gynaecology',
       // 'Obstetrics',
       // 'IVF / Reproductive Medicine and Surgery',
     ],

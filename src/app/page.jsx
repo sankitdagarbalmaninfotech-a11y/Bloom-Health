@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 // Using native img in Vite app
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import herobg2 from '../../dist/herobg2.jpeg';
@@ -16,8 +16,10 @@ import {
   ArrowRight,
   Check,
   Plus,
+  Home,
 } from 'lucide-react';
 import { services } from '@/lib/services';
+import { useEffect } from 'react';
 const heroData = {
   headingLine1: 'WORLD-CLASS CARE,',
   headingLine2: 'CLOSE TO HOME',
@@ -25,19 +27,24 @@ const heroData = {
 };
 const featuresData = [
   {
-    title: 'Expert Consultants & Advanced Care',
-    desc: 'Our team includes leading consultants across Cardiology, Gastroenterology, Pediatrics, Ear Nose and Throat and more, offering specialist care backed by top-tier technology and proven techniques.',
-    icon: Stethoscope,
-  },
-  {
     title: 'Urgent Care When You Need It',
-    desc: 'Skip the A&E wait. Our Urgent Care Centre offers fast, walk-in treatment for a wide range of unexpected health concerns – no appointment needed.',
+    desc: 'Prompt access to care. Our Urgent Care Centre offers fast, walk-in treatment for a wide range of unexpected health concerns – no appointment needed.',
     icon: Clock,
   },
   {
     title: 'Comprehensive On-site Diagnostics',
     desc: 'From an onsite laboratory to state-of-the-art Ultrasound, CT and X-ray imaging, we deliver prompt answers and accurate results all under one roof.',
     icon: Activity,
+  },
+  {
+    title: 'Expert Consultants & Advanced Care',
+    desc: 'Our team includes leading consultants across Cardiology, Gastroenterology, Pediatrics, Ear Nose and Throat and more, offering specialist care backed by top-tier technology and proven techniques.',
+    icon: Stethoscope,
+  },
+  {
+    title: 'Hospital at Home',
+    desc: 'Receive hospital-level care in the comfort of your own home, with our expert team providing personalized treatment plans and support.',
+    icon: Home,
   },
   {
     title: 'Self-funded & Insured Patients Welcome',
@@ -59,6 +66,16 @@ const formFields = [
   { label: 'Phone Number', type: 'tel', placeholder: '+44 1234 567890', name: 'phone' },
 ];
 export default function HomePage() {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const el = document.querySelector(location.state.scrollTo);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.state]);
+
   return (
     <>
       <motion.section
@@ -141,7 +158,7 @@ export default function HomePage() {
               compassion, precision, and discretion.
             </p>
           </div>
-          <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+          <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-5'>
             {featuresData.map(({ title, desc, icon: Icon }) => (
               <div
                 className='flex flex-col items-start p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition'

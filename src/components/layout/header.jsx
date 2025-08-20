@@ -1,25 +1,45 @@
 // No router links needed here, we use hash anchors
-import {
-  Menu,
-  Phone as PhoneIconLucide,
-  Mail,
-  Search,
-  ChevronDown,
-  Layers,
-} from 'lucide-react';
+import { Menu, Phone as PhoneIconLucide, Mail, Search, ChevronDown, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Logo } from '@/components/logo';
 import { useEffect, useRef, useState } from 'react';
-import { featureOptions, medicalServicesMenu, navItems, socialLinks, specialtyColumns } from './MenuUtils';
-import { HashLink } from 'react-router-hash-link';
+import { featureOptions, medicalServicesMenu, specialtyColumns } from './MenuUtils';
 
 export function Header() {
   const [openMenu, setOpenMenu] = useState(null);
   const [openLeftSheet, setOpenLeftSheet] = useState(false); // For the left sheet (feature options)
   const [openRightSheet, setOpenRightSheet] = useState(false); // For the right sheet (main menu)
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem('token');
+
+  const scrollToSection = (sectionId) => {
+    const section = document.querySelector(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setOpenRightSheet(false); // Close mobile menu if open
+      setOpenLeftSheet(false);
+    }
+  };
+
+  const handleNavClick = (item) => {
+    if (location.pathname === '/home') {
+      // Already on /home, scroll immediately
+      scrollToSection(item.sectionId);
+    } else {
+      // Navigate to /home and pass sectionId
+      navigate('/home', { state: { scrollTo: item.sectionId } });
+    }
+  };
+
+  const navItems = [
+    { name: 'Home', sectionId: '#home' },
+    { name: 'Our Story', sectionId: '#about-us' },
+    { name: 'Services', sectionId: '#services' },
+    { name: 'Contact Us', sectionId: '#contact' },
+  ];
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -38,7 +58,8 @@ export function Header() {
       {/* Top Bar */}
       <div className='bg-primary text-primary-foreground'>
         <div className='container mx-auto flex h-12 items-center justify-between px-4 sm:px-6 lg:px-8'>
-          <div className='flex items-center space-x-6'>
+          <div className='flex md:hidden items-center space-x-6'/>
+          <div className='hidden md:flex items-center space-x-6'>
             <div className='flex items-center space-x-2'>
               <PhoneIconLucide className='h-4 w-4' />
               <a href='tel:(001)88451234' className='text-xs hover:underline'>
@@ -52,37 +73,57 @@ export function Header() {
               </a>
             </div>
           </div>
-          <div className='flex items-center space-x-4'>
+          <div className='flex items-center space-x-2'>
             <nav className='hidden lg:flex items-center space-x-2'>
-              {navItems.map((item) => (
-                <HashLink
-                  key={item.name}
-                  smooth
-                  to={item.href}
-                  className='px-3 py-1 text-sm font-medium text-primary-foreground hover:bg-primary/90 rounded-md transition-colors'
-                >
-                  {item.name}
-                </HashLink>
-              ))}
+              <nav className='hidden lg:flex items-center space-x-2'>
+                {navItems.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item)}
+                    className='px-3 py-1 text-sm font-medium text-primary-foreground hover:bg-primary/90 rounded-md transition-colors'
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </nav>
             </nav>
-            <div>
-              <Link to='/bookAppointment' className='book-btn'>
-                <span className='full-text'>Book an Appointment</span>
-                <span className='short-text'>Book</span>
-              </Link>
+            <div className='flex gap-1'>
+              {token ? (
+                <div>
+                  <Link to='/bookAppointment' className='book-btn'>
+                    <span className='full-text'>Book an Appointment</span>
+                    <span className='short-text'>Book</span>
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <Link to='/login' className='book-btn'>
+                      <span className='full-text'>Login</span>
+                      <span className='short-text'>Login</span>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to='/register' className='book-btn'>
+                      <span className='full-text'>Register</span>
+                      <span className='short-text'>Register</span>
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
-            <div className='hidden lg:flex items-center space-x-3'>
-              {socialLinks.map((social) => (
-                <a
-                  href={social.href}
-                  aria-label={social.name}
-                  className='hover:opacity-80 transition-opacity'
-                  key={social.name}
-                >
-                  <social.icon className='h-4 w-4' />
-                </a>
-              ))}
-            </div>
+            {token ? (
+              <>
+                <div>
+                  <Link
+                    to='/profile'
+                    className='flex items-center justify-center w-10 h-10 rounded-full bg-white text-[#157fc1] font-semibold hover:bg-[#11679c] hover:text-white transition border border-white'
+                  >
+                    P
+                  </Link>
+                </div>
+              </>
+            ) : null}
           </div>
         </div>
       </div>
@@ -134,14 +175,13 @@ export function Header() {
                             </a>
                           ),
                         )}
-                        <div className="absolute left-[50px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
+                        <div className='absolute left-[50px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full' />
                       </div>
-                      
                     )}
 
                     {/* Mega Menu for Medical Services */}
                     {openMenu === item.name && item.name === 'Medical Services' && (
-                     <div className="absolute left-[-260px] mt-3 bg-gradient-to-br from-white to-gray-100 shadow-lg border border-gray-200 rounded-lg w-[90vw] max-w-[1200px] h-auto min-h-[300px] p-6 z-50">
+                      <div className='absolute left-[-260px] mt-3 bg-gradient-to-br from-white to-gray-100 shadow-lg rounded-lg w-[90vw] max-w-[1200px] h-auto min-h-[300px] p-6 z-50'>
                         <div className='grid grid-cols-5 gap-8'>
                           {medicalServicesMenu.map((section) => (
                             <div key={section.title}>
@@ -173,7 +213,7 @@ export function Header() {
                             </div>
                           ))}
                         </div>
-                        <div className="absolute left-[310px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
+                        <div className='absolute left-[310px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full' />
                       </div>
                     )}
 
@@ -193,7 +233,7 @@ export function Header() {
                             </ul>
                           ))}
                         </div>
-                        <div className="absolute left-[255px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full" />
+                        <div className='absolute left-[255px] top-0 w-0 h-0 border-l-[10px] border-l-transparent border-b-[10px] border-b-gray-100 border-r-[10px] border-r-transparent transform -translate-y-full' />
                       </div>
                     )}
                   </div>
@@ -201,7 +241,7 @@ export function Header() {
             </nav>
           </div>
           <div className='flex-1' />
-          <div className='hidden lg:flex items-center space-x-3'>
+          {/* <div className='hidden lg:flex items-center space-x-3'>
             <Button
               variant='ghost'
               size='icon'
@@ -210,7 +250,7 @@ export function Header() {
               <Search className='h-5 w-5' />
               <span className='sr-only'>Search</span>
             </Button>
-          </div>
+          </div> */}
           {/* Mobile Feature Options Menu */}
           <div className='lg:hidden mr-3'>
             <Sheet open={openLeftSheet} onOpenChange={setOpenLeftSheet}>
@@ -372,17 +412,17 @@ export function Header() {
                     <Logo />
                   </div>
                   <nav className='flex flex-col space-y-1 p-4'>
-                  {navItems.map((item) => (
-                    <HashLink  // Changed from Link to HashLink
-                      smooth
-                      to={item.href}  // Changed from href to to
-                      className='block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-primary transition-colors'
-                      key={item.name}
-                      onClick={() => setOpenRightSheet(false)} // Close the sheet when clicked
-                    >
-                      {item.name}
-                    </HashLink>
-                  ))}
+                    <nav className='flex flex-col space-y-1 p-4'>
+                      {navItems.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavClick(item)}
+                          className='block rounded-md px-3 py-2 text-base font-medium text-foreground hover:bg-accent hover:text-primary transition-colors text-left'
+                        >
+                          {item.name}
+                        </button>
+                      ))}
+                    </nav>
                   </nav>
                   <div className='mt-auto space-y-4 p-4 border-t border-neutral-200'>
                     <div className='flex items-center space-x-2'>
@@ -403,7 +443,7 @@ export function Header() {
                         info@bloomhealth.com
                       </a>
                     </div>
-                    <div className='flex items-center space-x-2 pt-2'>
+                    {/* <div className='flex items-center space-x-2 pt-2'>
                       <Button
                         variant='ghost'
                         size='icon'
@@ -412,7 +452,7 @@ export function Header() {
                         <Search className='h-5 w-5' />
                         <span className='sr-only'>Search</span>
                       </Button>
-                    </div>
+                    </div> */}
                     <Button
                       asChild
                       className='w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-md'

@@ -144,7 +144,7 @@ body {
   font-weight: 600;
   font-size: medium;
   border-radius: 5px;
-  padding: 10px 24px;
+  padding: 10px 10px;
   text-transform: none;
 }
 
@@ -186,7 +186,7 @@ body {
 }
 
 .info-icon {
-  color: #006680;
+  color: #157fc1;
   font-size: 50px !important;
   margin-right: 10px;
 }
@@ -194,7 +194,7 @@ body {
 .info-block h4 {
   margin: 0;
   font-size: 16px;
-  color: #004d5a;
+  color: #157fc1;
 }
 
 .info-block p {
@@ -225,11 +225,12 @@ h3 {
 input[type="text"],
 input[type="email"],
 input[type="date"],
+input[type="password"],
+input[type="tel"],
 select,
 textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -239,7 +240,7 @@ textarea {
 }
 
 .submit-btn {
-  background-color: #006680;
+  background-color: #157fc1;
   color: white;
   padding: 10px 24px;
   border: none;

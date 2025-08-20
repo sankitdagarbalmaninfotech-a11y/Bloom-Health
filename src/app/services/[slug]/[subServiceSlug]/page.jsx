@@ -1,11 +1,16 @@
 // Client app fallback instead of Next notFound
 import { getSubService, getService } from '@/lib/services';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 // Static params removed in React app
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 export default function SubServicePage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { slug = '', subServiceSlug = '' } = useParams();
   const service = getService(slug);
   const subService = getSubService(slug, subServiceSlug);
@@ -16,6 +21,7 @@ export default function SubServicePage() {
       </div>
     );
   }
+  const location = useLocation();
   return (
     <>
       <main className='flex-grow'>
@@ -49,29 +55,51 @@ export default function SubServicePage() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
               <div className='md:col-span-2'>
                 <h2 className='text-3xl font-bold text-foreground'>About {subService.title}</h2>
-                <p className='mt-4 text-lg text-muted-foreground'>{subService.description}</p>
+                <p className='mt-4 text-lg text-muted-foreground'>{subService.shortDescription}</p>
                 <p className='mt-4 text-lg text-muted-foreground'>
                   Further details about the {subService.title}service will be provided here. This
                   section can include information about the procedures, what to expect, the
                   technology used, and the specialists involved.
                 </p>
                 <Button asChild size='lg' className='mt-8'>
-                  <a href='/#contact'>Book an Appointment</a>
+                  <a href='/#contact'>Contact us for more information</a>
                 </Button>
               </div>
               <div className='bg-gray-50 p-6 rounded-lg'>
                 <h3 className='text-xl font-semibold text-foreground mb-4'>Related Services</h3>
                 <ul className='space-y-2'>
-                  {service.subServices.map((sub) => (
-                    <li key={sub.slug}>
-                      <Link
-                        to={`/services/${service.slug}/${sub.slug}`}
-                        className={`hover:text-primary ${sub.slug === subService.slug ? 'text-primary font-bold' : ''}`}
-                      >
-                        {sub.title}
-                      </Link>
-                    </li>
-                  ))}
+                  {service?.subServices
+                    .filter((sub) => {
+                      if (location?.pathname === '/services/outpatient-services/adults')
+                        return sub.slug === 'adults';
+                      if (location?.pathname === '/services/outpatient-services/pediatrics')
+                        return sub.slug === 'pediatrics';
+                      return false;
+                    })
+                    .flatMap((sub) =>
+                      sub.servicesChild.map((child) => {
+                        const path = child?.title
+                          .split(' ')
+                          .map((word, i) =>
+                            i === 0
+                              ? word.toLowerCase()
+                              : word.charAt(0).toUpperCase() + word.slice(1),
+                          )
+                          .join('');
+                        return (
+                          <li key={child.slug}>
+                            <Link
+                              to={`/${path}`}
+                              className={`hover:text-primary ${
+                                child.slug === subService?.slug ? 'text-primary font-bold' : ''
+                              }`}
+                            >
+                              {child.title}
+                            </Link>
+                          </li>
+                        );
+                      }),
+                    )}
                 </ul>
               </div>
             </div>
