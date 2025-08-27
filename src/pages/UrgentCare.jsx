@@ -9,9 +9,12 @@ const UrgentCare = () => {
     <Department
       departmentName='Urgent Care at Bloom Health'
       overviewText='Rapid, walk-in urgent care for medical needs that can’t wait.'
-      overviewDescription='At Bloom Health, we provide fast, expert care for adults and children, 24 hours a day, with no appointment needed and minimal waiting time.
-
-      Our urgent care service is designed to manage a wide range of minor to moderate illnesses and everyday health concerns, offering immediate access to clinical assessment, diagnosis, and treatment. Whether you’re feeling unwell, need prompt medical advice, or require treatment for minor conditions, our experienced clinical team is here to help you feel better, faster.'
+      overviewDescription={
+        <>
+          At Bloom Health, we provide fast, expert care for adults and children, 24 hours a day, with no appointment needed and minimal waiting time.<br /><br />
+          Our urgent care service is designed to manage a wide range of minor to moderate illnesses and everyday health concerns, offering immediate access to clinical assessment, diagnosis, and treatment. Whether you’re feeling unwell, need prompt medical advice, or require treatment for minor conditions, our experienced clinical team is here to help you feel better, faster.
+        </>
+      }
       services={[
         'Rheumatology Consultation',
         'EEG Testing',
@@ -19,11 +22,23 @@ const UrgentCare = () => {
         'Botulinum Toxin Therapy',
       ]}
       diseases={[
-        'Walk-in urgent care for adults and children',
-        'Immediate assessment and treatment for minor illnesses and health concerns',
-        'On-site diagnostics and investigations',
-        'In-house pharmacy and outpatient prescriptions',
-        'Access to outpatient referrals and follow-up if specialist care is required',
+        <>
+          <strong>Immediate assessment and treatment&nbsp;</strong>for common illnesses and minor conditions
+        </>,
+        <>
+          <strong>Point-of-care testing&nbsp;</strong> for rapid results, so you can get answers quickly
+        </>,
+        <>
+          <strong>On-site imaging and investigations</strong>, including X-ray and ultrasound (where clinically appropriate)
+        </>,
+        <>
+          <span>
+            <strong>In-house pharmacy</strong>{' '}providing standard medications and outpatient prescriptions, with a code system for items not available locally
+          </span>
+        </>,
+        <>
+          <strong>Access to outpatient referrals and follow-up&nbsp;</strong> if specialist care is required
+        </>,
       ]}
       moreDetails={
         <div>
@@ -33,7 +48,7 @@ const UrgentCare = () => {
           <br />
           <br />
           For more detailed information about our Urgent Care Centre services and tests, please
-          visit our <strong>Urgent Care Information Page.</strong>.
+          visit our <strong>Urgent Care Information Page</strong>.
         </div>
       }
       specialtyUnits={[

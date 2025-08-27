@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
+import { CheckSharp } from '@mui/icons-material';
 
 export default function ServicePage() {
   const { slug = '' } = useParams();
@@ -39,14 +40,25 @@ export default function ServicePage() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
               {/* Left Column */}
               <div className='md:col-span-2'>
-                <h2 className='text-3xl font-bold text-foreground'>
-                  About Our {service.title} Services
+                <h2 className='text-3xl font-bold text-[#157fc1]'>
+                  {service?.shortDescription}
                 </h2>
                 <p className='mt-4 text-lg text-muted-foreground'>
-                  {service.longDescription || service.description}
+                  {service?.longDescription || service?.description}
+                </p>
+                <ul className='text-gray-700 space-y-1 mt-10'>
+                  {service?.diseases?.map((disease, index) => (
+                    <li key={index} className='flex items-center'>
+                      <CheckSharp fontSize='small' className='text-black mr-2' />
+                      {disease}
+                    </li>
+                  ))}
+                </ul>
+                <p className='mt-12 text-lg text-muted-foreground'>
+                  {service?.footer}
                 </p>
                 <Button asChild size='lg' className='mt-8'>
-                  <a href='/#contact'>Book an Appointment</a>
+                  <a href='/#contact'>Contact us for more information</a>
                 </Button>
               </div>
 
@@ -71,12 +83,12 @@ export default function ServicePage() {
         </section>
 
         {/* Sub Services */}
-        {service.subServices && service.subServices.length > 0 && (
+        {service?.subServices && service?.subServices.length > 0 && (
           <section id='sub-services' className='py-20 bg-gray-50'>
             <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
               <div className='text-center mb-12'>
                 <h2 className='font-headline text-3xl font-bold text-foreground'>
-                  Our {service.title} Offerings
+                  {service?.servicesHeader}
                 </h2>
                 <p className='mt-2 text-lg text-muted-foreground'>
                   Explore the specific services we provide in this area.
@@ -100,6 +112,7 @@ export default function ServicePage() {
                     </Link>
                   </div>
                 ))}
+                
               </div>
             </div>
           </section>

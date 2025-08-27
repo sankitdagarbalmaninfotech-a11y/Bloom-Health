@@ -13,14 +13,15 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
+import { Link } from 'react-router-dom';
 const footerColumns = [
   {
     title: 'OUR SERVICES',
     links: [
-      { name: 'Cardiac Care', href: '#services' },
-      { name: 'Gynecology', href: '#services' },
-      { name: 'Neurology', href: '#services' },
-      { name: 'Respiratory Care', href: '#services' },
+      { name: 'Cardiac Care', href: '/cardiology' },
+      { name: 'Gynaecology ', href: '/gynaecology ' },
+      { name: 'Neurology', href: '/neurology' },
+      { name: 'Respiratory Care', href: '/respiratoryMedicine' },
     ],
   },
   {
@@ -34,9 +35,9 @@ const footerColumns = [
   {
     title: 'CONTACT',
     links: [
-      { name: 'Get in Touch', href: '#contact' },
-      { name: 'Emergency Care', href: '#contact' },
-      { name: 'Book Appointment', href: '#contact' },
+      { name: 'Get in Touch', href: '/contact' },
+      { name: 'Emergency Care', href: '/contact' },
+      { name: 'Book Appointment', href: '/bookAppointment' },
     ],
   },
   {
@@ -125,16 +126,16 @@ export function Footer() {
               <ul className='space-y-2'>
                 {column.links.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className='text-sm text-muted-foreground hover:text-accent transition-colors'
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
-            )}
+            )}  
             {column.customContent && <div className='mt-4'>{column.customContent}</div>}
           </div>
         ))}
@@ -153,8 +154,8 @@ export function Footer() {
             {socialLinksContent}
           </div>
         </div>
-        {footerColumnsContent}
-        <div className='mt-12'>
+        {location.pathname == '/home' ? 
+        <div className='mt-5 mb-12'>
           <div className='h-[280px] sm:h-[340px] md:h-[400px] w-full rounded-lg overflow-hidden shadow-lg'>
             <iframe
               src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158858.47340000002!2d-0.2416814!3d51.5285582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C%20UK!5e0!3m2!1sen!2sus!4v1647881234567!5m2!1sen!2sus'
@@ -167,7 +168,8 @@ export function Footer() {
               title='Bloom Health Location'
             />
           </div>
-        </div>
+        </div> : null}
+        {footerColumnsContent}
         <div className='mt-8 md:mt-12 border-t pt-6 md:pt-8 text-center'>
           <p className='text-sm text-muted-foreground'>
             © {new Date().getFullYear()}Bloom Health. All rights reserved.

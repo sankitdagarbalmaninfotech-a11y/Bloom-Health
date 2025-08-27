@@ -33,7 +33,7 @@ const BookAnAppointment = () => {
 
   return (
     <div>
-      <div className='bg-blue-500 border-b border-gray-300 py-3 px-4 sm:px-6'>
+      <div className='bg-[#157fc1] border-b border-gray-300 py-3 px-4 sm:px-6'>
         <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-[30px] font-semibold text-white sm:ml-6 lg:ml-12'>
           Book an Appointment
         </h2>
@@ -104,9 +104,9 @@ const BookAnAppointment = () => {
               <input type='radio' name='gender' /> Female
             </label>
           </div>
-          <input type='date' />
-          <input type='text' placeholder='Mobile Number *' />
-          <input type='email' placeholder='Email Address *' />
+          <input type='date' className="mb-3"/>
+          <input type='text' placeholder='Mobile Number *' className="mb-3"/>
+          <input type='email' placeholder='Email Address *' className="mb-3"/>
 
           <h3>Appointment Information</h3>
           <label className='section-label'>Is this your first time visiting us? *</label>
@@ -126,7 +126,7 @@ const BookAnAppointment = () => {
             <option>Evening</option>
           </select>
 
-          <textarea placeholder='Reason for Visit *'></textarea>
+          <textarea placeholder='Reason for Visit *' className="mt-3"></textarea>
 
           <button className='submit-btn'>Submit</button>
         </div>

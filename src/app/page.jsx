@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 // Using native img in Vite app
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import herobg2 from '../../dist/herobg2.jpeg';
@@ -16,28 +16,35 @@ import {
   ArrowRight,
   Check,
   Plus,
+  Home,
 } from 'lucide-react';
 import { services } from '@/lib/services';
+import { useEffect } from 'react';
 const heroData = {
-  headingLine1: 'WORLD-CLASS CARE,',
+  headingLine1: 'WORLD-CLASS CARE',
   headingLine2: 'CLOSE TO HOME',
-  subheading: `A new standard in private healthcare for Milton Keynes. Experience world-class medical treatment with a personal touch; expert treatment, kind support, and comfort you can count on, close to home. From urgent walk-in care to specialist clinics, Bloom Health Hospital is here to put your health first, with no long waits and no compromises on quality.`,
+  subheading: `A new standard in private healthcare for Milton Keynes. Experience world-class medical treatment with a personal touch expert treatment, kind support, and comfort you can count on, close to home. From urgent walk-in care to specialist clinics, Bloom Health Hospital is here to put your health first, with no long waits and no compromises on quality.`,
 };
 const featuresData = [
   {
-    title: 'Expert Consultants & Advanced Care',
-    desc: 'Our team includes leading consultants across Cardiology, Gastroenterology, Pediatrics, Ear Nose and Throat and more, offering specialist care backed by top-tier technology and proven techniques.',
-    icon: Stethoscope,
-  },
-  {
     title: 'Urgent Care When You Need It',
-    desc: 'Skip the A&E wait. Our Urgent Care Centre offers fast, walk-in treatment for a wide range of unexpected health concerns – no appointment needed.',
+    desc: 'Prompt access to care. Our Urgent Care Centre offers fast, walk-in treatment for a wide range of unexpected health concerns – no appointment needed.',
     icon: Clock,
   },
   {
     title: 'Comprehensive On-site Diagnostics',
     desc: 'From an onsite laboratory to state-of-the-art Ultrasound, CT and X-ray imaging, we deliver prompt answers and accurate results all under one roof.',
     icon: Activity,
+  },
+  {
+    title: 'Expert Consultants & Advanced Care',
+    desc: 'Our team includes leading consultants across Cardiology, Gastroenterology, Pediatrics, Ear Nose and Throat and more, offering specialist care backed by top-tier technology and proven techniques.',
+    icon: Stethoscope,
+  },
+  {
+    title: 'Hospital at Home',
+    desc: 'Receive hospital-level care in the comfort of your own home, with our expert team providing personalized treatment plans and support.',
+    icon: Home,
   },
   {
     title: 'Self-funded & Insured Patients Welcome',
@@ -59,6 +66,15 @@ const formFields = [
   { label: 'Phone Number', type: 'tel', placeholder: '+44 1234 567890', name: 'phone' },
 ];
 export default function HomePage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const el = document.querySelector(location.state.scrollTo);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.state]);
+
   return (
     <>
       <motion.section
@@ -69,7 +85,7 @@ export default function HomePage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className='absolute inset-0 ' />
+        <div className='absolute inset-0'/>
         <motion.div
           className='container mx-auto h-full flex items-center px-4'
           initial={{ y: 20, opacity: 0 }}
@@ -96,7 +112,7 @@ export default function HomePage() {
           </div>
         </motion.div>
       </motion.section>
-      <div className='m-6'>
+      <div>
         <div className='hide-above-1280 mt-5'>
           <img
             src={herobg2}
@@ -106,7 +122,7 @@ export default function HomePage() {
             height={800}
           />
         </div>
-        <div className='hide-above-1280  mt-6 rounded-3xl w-full p-6 bg-white/90 backdrop-blur-lg shadow-2xl border border-gray-200 flex flex-col items-center text-center'>
+        <div className='hide-above-1280 mt-6 rounded-3xl w-full p-6 bg-white/90 backdrop-blur-lg shadow-2xl border border-gray-200 flex flex-col items-center text-center'>
           <h1 className='text-2xl sm:text-3xl font-headline font-extrabold text-gray-900 leading-tight drop-shadow mb-1'>
             {heroData.headingLine1}
           </h1>
@@ -141,7 +157,7 @@ export default function HomePage() {
               compassion, precision, and discretion.
             </p>
           </div>
-          <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-4'>
+          <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-5'>
             {featuresData.map(({ title, desc, icon: Icon }) => (
               <div
                 className='flex flex-col items-start p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition'
