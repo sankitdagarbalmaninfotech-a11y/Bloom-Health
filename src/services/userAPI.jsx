@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { showToast } from '../utils/toast';
 import { setUser } from './slices/userSlice';
+import { handleAuthError } from '../utils/authErrorHandler';
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -29,9 +30,13 @@ export const user = createApi({
           const { data } = await queryFulfilled;
           dispatch(setUser(data?.user));
         } catch (err) {
-          showToast.error(err?.error?.data?.message || 'Login to load user details!');
+          const handled = handleAuthError(err?.error);
+
+          if (!handled) {
+            showToast.error(err?.error?.data?.message || 'Login to load user details!');
+          }
         }
-    },
+      },
     }),
   }),
 });

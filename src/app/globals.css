@@ -227,12 +227,19 @@ input[type="email"],
 input[type="date"],
 input[type="password"],
 input[type="tel"],
-select,
 textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 45px;
+  border-radius: 4px !important;
 }
 
 textarea {
@@ -306,6 +313,22 @@ textarea {
   overflow: hidden !important; /* Hide scrollbar */
   resize: none !important;     /* Disable manual resize */
 }
+
+.custom-spinner {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #e5e7eb; /* light gray background */
+  border-top: 6px solid #157fc1; /* main brand color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(21, 127, 193, 0.4);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Show short text and hide full text below 540px */
 @media (max-width: 540px) {
   .short-text {

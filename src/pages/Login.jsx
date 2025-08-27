@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/authAPI";
 import { showToast } from "@/utils/toast"; // your react-toastify wrapper
 import { validateField, validateForm } from "../utils/validation";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location?.state?.from || '/';
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +22,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/home");
+      navigate(from, { replace: true });
     }
   }, [isSuccess]);
 

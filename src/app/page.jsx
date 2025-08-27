@@ -21,9 +21,9 @@ import {
 import { services } from '@/lib/services';
 import { useEffect } from 'react';
 const heroData = {
-  headingLine1: 'WORLD-CLASS CARE,',
+  headingLine1: 'WORLD-CLASS CARE',
   headingLine2: 'CLOSE TO HOME',
-  subheading: `A new standard in private healthcare for Milton Keynes. Experience world-class medical treatment with a personal touch; expert treatment, kind support, and comfort you can count on, close to home. From urgent walk-in care to specialist clinics, Bloom Health Hospital is here to put your health first, with no long waits and no compromises on quality.`,
+  subheading: `A new standard in private healthcare for Milton Keynes. Experience world-class medical treatment with a personal touch expert treatment, kind support, and comfort you can count on, close to home. From urgent walk-in care to specialist clinics, Bloom Health Hospital is here to put your health first, with no long waits and no compromises on quality.`,
 };
 const featuresData = [
   {
@@ -66,7 +66,6 @@ const formFields = [
   { label: 'Phone Number', type: 'tel', placeholder: '+44 1234 567890', name: 'phone' },
 ];
 export default function HomePage() {
-
   const location = useLocation();
 
   useEffect(() => {
@@ -86,7 +85,7 @@ export default function HomePage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className='absolute inset-0 ' />
+        <div className='absolute inset-0'/>
         <motion.div
           className='container mx-auto h-full flex items-center px-4'
           initial={{ y: 20, opacity: 0 }}
@@ -113,7 +112,7 @@ export default function HomePage() {
           </div>
         </motion.div>
       </motion.section>
-      <div className='m-6'>
+      <div>
         <div className='hide-above-1280 mt-5'>
           <img
             src={herobg2}
@@ -123,7 +122,7 @@ export default function HomePage() {
             height={800}
           />
         </div>
-        <div className='hide-above-1280  mt-6 rounded-3xl w-full p-6 bg-white/90 backdrop-blur-lg shadow-2xl border border-gray-200 flex flex-col items-center text-center'>
+        <div className='hide-above-1280 mt-6 rounded-3xl w-full p-6 bg-white/90 backdrop-blur-lg shadow-2xl border border-gray-200 flex flex-col items-center text-center'>
           <h1 className='text-2xl sm:text-3xl font-headline font-extrabold text-gray-900 leading-tight drop-shadow mb-1'>
             {heroData.headingLine1}
           </h1>

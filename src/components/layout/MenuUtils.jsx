@@ -1,26 +1,26 @@
 export const featureOptions = [
   { name: 'Find a Doctor', submenu: [{ name: 'Bloom Hospital Doctors', href: '/hospitalsDoctors' }], enabled: true },
   { name: 'Medical Services', href: '#', enabled: true },
-  { name: 'Centers of Excellence', submenu: [
-    { name: 'Women Wellbeing', href: '/womenWellBeing' },
-    { name: 'Cardiometabolic and Weight Management', href: '#' },
-    { name: 'Pain Relief', href: '#' },
-    { name: 'Ophthalmology Center', href: '#' }
-  ], enabled: true },
-  { name: 'Specialty Units/Clinics', href: '#', enabled: true },
-  { name: 'Executives Checkups', submenu: [
-    { name: 'Essential Health Checkups', href: '#' },
-    { name: 'Gold Health Checkups', href: '#' },
-    { name: 'Platinum Health Checkups', href: '#' }
-  ], enabled: true },
-  { name: 'Packages', submenu: [
-    { name: 'Women’s Health Packages', href: '#' },
-    { name: 'Men’s Health Packages', href: '#' },
-    { name: 'Endocrinology Packages', href: '#' },
-    { name: 'Cardiology Packages', href: '#' },
-    { name: 'Weight Loss Packages', href: '#' },
-    { name: 'Rheumatology Packages', href: '#' }
-  ], enabled: true },
+  // { name: 'Centers of Excellence', submenu: [
+  //   { name: 'Women Wellbeing', href: '/womenWellBeing' },
+  //   { name: 'Cardiometabolic and Weight Management', href: '#' },
+  //   { name: 'Pain Relief', href: '#' },
+  //   { name: 'Ophthalmology Center', href: '#' }
+  // ], enabled: true },
+  // { name: 'Specialty Units/Clinics', href: '#', enabled: true },
+  // { name: 'Executives Checkups', submenu: [
+  //   { name: 'Essential Health Checkups', href: '#' },
+  //   { name: 'Gold Health Checkups', href: '#' },
+  //   { name: 'Platinum Health Checkups', href: '#' }
+  // ], enabled: true },
+  // { name: 'Packages', submenu: [
+  //   { name: 'Women’s Health Packages', href: '#' },
+  //   { name: 'Men’s Health Packages', href: '#' },
+  //   { name: 'Endocrinology Packages', href: '#' },
+  //   { name: 'Cardiology Packages', href: '#' },
+  //   { name: 'Weight Loss Packages', href: '#' },
+  //   { name: 'Rheumatology Packages', href: '#' }
+  // ], enabled: true },
 ];
 
 
