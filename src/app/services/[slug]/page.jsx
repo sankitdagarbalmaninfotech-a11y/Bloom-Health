@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 import { CheckSharp } from '@mui/icons-material';
 
+
 export default function ServicePage() {
   const { slug = '' } = useParams();
   const service = getService(slug);
